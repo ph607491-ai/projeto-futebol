@@ -1,0 +1,471 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Essencial para responsividade */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Layout Geral (Desktop e Padrão) */
+/* -------------------------------------------------------------------------- */
+
+.cabecalho-principal {
+    background: linear-gradient(135deg, #004d99 0%, #0066cc 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Container do Header - JÁ CENTRALIZADO */
+.container-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* NOVO: Container Principal (Conteúdo Centralizado com Bordas Verticais) */
+/* -------------------------------------------------------------------------- */
+.container-principal {
+    max-width: 1200px; /* Largura máxima para telas de computador */
+    margin: 30px auto; /* Centraliza o conteúdo e cria a "borda vertical" */
+    padding: 0 20px;
+    background-color: white; /* Fundo branco para o conteúdo principal */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.logo-svg {
+    width: 50px; 
+    height: 50px; 
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.titulo-site {
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.subtitulo-site {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #c0c0c0;
+}
+
+/* Menu de Navegação */
+.menu-nav {
+    display: flex;
+    justify-content: center;
+    background-color: #003366;
+    padding: 10px 0;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.link-nav {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 6px;
+}
+
+.link-nav:hover {
+    background-color: #0055aa;
+}
+
+.link-nav.ativo {
+    background-color: #ff6b35; /* Cor de destaque para a página atual */
+    color: white;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Seções de Conteúdo */
+/* -------------------------------------------------------------------------- */
+section {
+    padding: 40px 0;
+    border-top: 1px solid #eee;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+.titulo-secao {
+    font-size: 2em;
+    color: #0066cc;
+    margin-bottom: 25px;
+    padding-left: 10px;
+    border-left: 5px solid #ff6b35;
+    font-weight: 700;
+}
+
+.card-futebol,
+.card-basquete,
+.card-curiosidade {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.titulo-card {
+    color: #333;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.texto-card {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    font-size: 1em;
+    text-align: justify;
+}
+
+.destaque-info {
+    padding: 10px;
+    background-color: #fff0d9;
+    border-radius: 6px;
+    border-left: 4px solid #ff6b35;
+    font-size: 0.95em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tabelas de Classificação/Ranking */
+/* -------------------------------------------------------------------------- */
+
+.tabela-responsiva {
+    overflow-x: auto; /* Permite scroll horizontal em telas pequenas */
+    margin-bottom: 20px;
+}
+
+.tabela-ranking {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: white;
+}
+
+.tabela-ranking th,
+.tabela-ranking td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabela-ranking thead {
+    background-color: #0066cc;
+    color: white;
+    font-weight: 600;
+}
+
+.tabela-ranking tbody tr:hover {
+    background-color: #eef;
+}
+
+.posicao-libertadores {
+    background-color: #e6ffe6;
+    border-left: 4px solid #00aa00;
+}
+
+.legenda-tabela {
+    font-size: 0.85em;
+    color: #666;
+    padding-top: 10px;
+}
+
+.verde {
+    color: #00aa00;
+    font-weight: 600;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Listas de Jogos e Notícias (Grid Layout) */
+/* -------------------------------------------------------------------------- */
+
+.lista-jogos {
+    list-style-type: none;
+    padding: 10px 0;
+}
+
+.lista-jogos li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    color: #555;
+}
+
+/* Grid para Notícias */
+.grid-noticias,
+.grid-curiosidades {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-noticia {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%; /* Garante que todos tenham a mesma altura */
+}
+
+.card-noticia:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.card-noticia h5 {
+    color: #004d99;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.card-noticia p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.link-indicador {
+    display: block;
+    margin-top: 5px;
+    color: #ff6b35;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+.card-noticia-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Container de Links Externos (Grid Layout) */
+.container-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.link-externo {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    background-color: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.link-externo:hover {
+    background-color: #ff6b35;
+    transform: translateY(-2px);
+}
+
+/* Botão de Destaque (Link com formatação de botão) */
+.botao-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.botao-destaque {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ff6b35; /* Cor de Fundo */
+    color: white;
+    text-decoration: none;
+    border-radius: 30px; /* Bordas Arredondadas */
+    font-weight: 700;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+}
+
+.botao-destaque:hover {
+    background-color: #e65c2e;
+    box-shadow: 0 7px 20px rgba(255, 107, 53, 0.6);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* RODAPÉ */
+/* -------------------------------------------------------------------------- */
+
+.rodape-principal {
+    background-color: #003366;
+    color: #ccc;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+.container-rodape {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.texto-rodape {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.creditos {
+    font-size: 0.8em;
+    margin-bottom: 15px;
+    color: #999;
+}
+
+.links-rodape a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.links-rodape a:hover {
+    color: white;
+}
+
+/* -------------------------------------------------------------------------- */
+/* NOVO: Propriedade FLOAT e Clearfix */
+/* -------------------------------------------------------------------------- */
+
+.imagem-flutuante {
+    /* Implementação do Float: Coloca a imagem à esquerda */
+    float: left;
+    
+    /* Largura da imagem */
+    width: 250px; 
+    height: auto;
+    
+    /* Espaçamento em volta para o texto fluir */
+    margin-right: 20px; 
+    margin-bottom: 10px;
+    
+    /* Estilo */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Clearfix: Solução para o contêiner pai abraçar o elemento flutuante */
+/* Evita que o conteúdo que vem depois suba e se alinhe ao lado do float */
+.secao-float::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Responsividade (Media Queries) */
+/* -------------------------------------------------------------------------- */
+
+/* Breakpoint 1: Tablets (Telas menores que 768px) */
+@media (max-width: 768px) {
+    .titulo-site {
+        font-size: 1.6em;
+    }
+    
+    .logo-svg {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .subtitulo-site {
+        font-size: 1em;
+    }
+    
+    .menu-nav {
+        padding: 10px 0;
+    }
+    
+    .link-nav {
+        display: block; /* Links de navegação em uma coluna */
+        margin: 5px 0;
+        padding: 12px;
+    }
+    
+    .titulo-secao {
+        font-size: 1.5em;
+    }
+    
+    .container-links {
+        grid-template-columns: 1fr; /* Links externos empilhados */
+    }
+    
+    .grid-noticias,
+    .grid-curiosidades { 
+        grid-template-columns: 1fr; /* Notícias e Curiosidades em uma coluna */
+    }
+    
+    .tabela-ranking {
+        font-size: 0.8em;
+    }
+    
+    .tabela-ranking th,
+    .tabela-ranking td {
+        padding: 8px 5px;
+    }
+
+    .links-rodape a {
+        font-size: 0.9em;
+    }
+}
+
+
+/* Breakpoint 2: Smartphones (Telas menores que 480px) */
+@media (max-width: 480px) {
+    
+    .container-principal {
+        margin: 15px 0;
+        border-radius: 0; /* Remove borda arredondada para telas pequenas */
+        padding: 0 10px;
+    }
+
+    /* Regra de Responsividade para o Float */
+    .imagem-flutuante {
+        /* Remove a flutuação */
+        float: none;
+        /* Ocupa a largura total */
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        display: block;
+    }
+}
