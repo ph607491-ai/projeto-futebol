@@ -53,6 +53,75 @@
             justify-content: center;
             font-weight: bold;
         }
+        
+        /* Estilos para os vídeos */
+        .secao-videos {
+            margin: 40px 0;
+        }
+        
+        .grid-videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .card-video {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-video:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        .info-video {
+            padding: 20px;
+        }
+        
+        .info-video h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .info-video p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .tag-video {
+            display: inline-block;
+            background: #00aa00;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-videos {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-container iframe {
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body class="pagina-futebol">
@@ -298,15 +367,49 @@
             </div>
         </section>
 
-        <!-- Vídeo do YouTube -->
-        <section id="videos">
+        <!-- Seção de Vídeos -->
+        <section class="secao-videos" id="videos">
             <h3 class="titulo-secao">🎥 Melhores Momentos do Futebol</h3>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Cy8N2L8_e2I" 
-                        title="Melhores Momentos do Futebol" 
-                        allowfullscreen>
-                </iframe>
+            
+            <div class="grid-videos">
+                <!-- Primeiro Vídeo (Original) -->
+                <div class="card-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/Cy8N2L8_e2I" 
+                                title="Melhores Momentos do Futebol" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="info-video">
+                        <h4>⚽ Os Melhores Momentos do Futebol Mundial</h4>
+                        <p>Compilação com os gols mais bonitos, defesas incríveis e lances históricos do futebol mundial.</p>
+                        <span class="tag-video">COMPILAÇÃO</span>
+                    </div>
+                </div>
+                
+                <!-- Segundo Vídeo (Novo) -->
+                <div class="card-video">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/f4YBOII_h5w?si=CaQs7YrKcQ-yEwXT" 
+                                title="YouTube video player" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="info-video">
+                        <h4>🌟 Momentos Épicos do Futebol Brasileiro</h4>
+                        <p>Reviva os lances mais marcantes do futebol brasileiro, com gols históricos e jogadas geniais.</p>
+                        <span class="tag-video">BRASILEIRÃO</span>
+                    </div>
+                </div>
             </div>
+            
+            <p style="text-align: center; margin-top: 20px; color: #666;">
+                🔔 <strong>Ative as notificações</strong> para não perder nenhum conteúdo especial!
+            </p>
         </section>
 
         <!-- Notícias -->
@@ -410,6 +513,32 @@
             elementosHora.forEach(el => {
                 el.textContent = `🕒 ${hora}`;
             });
+        }
+        
+        // Atualizar ano atual
+        document.getElementById('anoAtual').textContent = new Date().getFullYear();
+        
+        // Contador de visitas (simulado)
+        let visitas = localStorage.getItem('visitasFutebol') || 0;
+        visitas = parseInt(visitas) + 1;
+        localStorage.setItem('visitasFutebol', visitas);
+        document.getElementById('contadorVisitas').textContent = `👁️ ${visitas} visualizações`;
+        
+        // Modo noturno
+        function alternarModoNoturno() {
+            document.body.classList.toggle('modo-noturno');
+            const modo = document.body.classList.contains('modo-noturno') ? '☀️ Modo Claro' : '🌙 Modo Noturno';
+            document.querySelector('[onclick="alternarModoNoturno()"]').textContent = modo;
+        }
+        
+        // Menu mobile
+        function toggleMenu() {
+            const menu = document.getElementById("myLinks");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
         }
         
         setInterval(atualizarHora, 1000);
