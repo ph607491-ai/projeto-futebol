@@ -36,90 +36,100 @@
             50% { opacity: 0.7; }
         }
         
-        .placar-time {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-        }
-        
-        .escudo-time {
-            width: 40px;
-            height: 40px;
-            background: #ddd;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        /* Estilos para os vídeos */
-        .secao-videos {
+        .video-destaque {
             margin: 40px 0;
+            text-align: center;
         }
         
-        .grid-videos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+        .video-destaque h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
         }
         
-        .card-video {
-            background: white;
-            border-radius: 12px;
+        .video-destaque p {
+            color: #666;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .video-container-single {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
         
-        .card-video:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .video-container iframe {
+        .video-container-single iframe {
             width: 100%;
-            height: 315px;
+            height: 450px;
             border: none;
-            border-radius: 8px;
+            display: block;
         }
         
-        .info-video {
-            padding: 20px;
+        .info-video-single {
+            background: white;
+            padding: 25px;
+            text-align: left;
+            border-top: 5px solid #00aa00;
         }
         
-        .info-video h4 {
+        .info-video-single h4 {
             color: #333;
             margin-bottom: 10px;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
         
-        .info-video p {
+        .info-video-single p {
             color: #666;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
         
         .tag-video {
             display: inline-block;
             background: #00aa00;
             color: white;
-            padding: 4px 12px;
+            padding: 6px 15px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 10px;
+            font-size: 0.9rem;
             font-weight: 600;
         }
         
+        .controles-video {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn-video {
+            background: #00aa00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn-video:hover {
+            background: #008800;
+        }
+        
         @media (max-width: 768px) {
-            .grid-videos {
-                grid-template-columns: 1fr;
+            .video-container-single iframe {
+                height: 300px;
             }
             
-            .video-container iframe {
-                height: 250px;
+            .controles-video {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -193,10 +203,10 @@
                     <p>Últimas do futebol</p>
                 </a>
                 
-                <a href="#videos" class="dashboard-card">
+                <a href="#video" class="dashboard-card">
                     <div class="dashboard-icon">🎥</div>
-                    <h4>Vídeos</h4>
-                    <p>Melhores momentos</p>
+                    <h4>Vídeo</h4>
+                    <p>Momento especial</p>
                 </a>
             </div>
         </section>
@@ -367,49 +377,34 @@
             </div>
         </section>
 
-        <!-- Seção de Vídeos -->
-        <section class="secao-videos" id="videos">
-            <h3 class="titulo-secao">🎥 Melhores Momentos do Futebol</h3>
+        <!-- Seção de Vídeo Único -->
+        <section class="video-destaque" id="video">
+            <h3 class="titulo-secao">🎥 Momento Épico do Futebol</h3>
+            <p>Assista a este vídeo especial com os momentos mais marcantes do futebol!</p>
             
-            <div class="grid-videos">
-                <!-- Primeiro Vídeo (Original) -->
-                <div class="card-video">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/Cy8N2L8_e2I" 
-                                title="Melhores Momentos do Futebol" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="info-video">
-                        <h4>⚽ Os Melhores Momentos do Futebol Mundial</h4>
-                        <p>Compilação com os gols mais bonitos, defesas incríveis e lances históricos do futebol mundial.</p>
-                        <span class="tag-video">COMPILAÇÃO</span>
-                    </div>
-                </div>
+            <div class="video-container-single">
+                <iframe 
+                    src="https://www.youtube.com/embed/f4YBOII_h5w?si=CaQs7YrKcQ-yEwXT" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
                 
-                <!-- Segundo Vídeo (Novo) -->
-                <div class="card-video">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/f4YBOII_h5w?si=CaQs7YrKcQ-yEwXT" 
-                                title="YouTube video player" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="info-video">
-                        <h4>🌟 Momentos Épicos do Futebol Brasileiro</h4>
-                        <p>Reviva os lances mais marcantes do futebol brasileiro, com gols históricos e jogadas geniais.</p>
-                        <span class="tag-video">BRASILEIRÃO</span>
-                    </div>
+                <div class="info-video-single">
+                    <h4>🌟 Momentos Épicos do Futebol Brasileiro</h4>
+                    <p>Reviva os lances mais marcantes do futebol brasileiro, com gols históricos e jogadas geniais que ficaram para sempre na memória dos torcedores. Uma compilação especial para os verdadeiros amantes do esporte.</p>
+                    <p><strong>Duração:</strong> 4:32 min | <strong>Visualizações:</strong> 1.2M</p>
+                    <span class="tag-video">BRASILEIRÃO</span>
                 </div>
             </div>
             
-            <p style="text-align: center; margin-top: 20px; color: #666;">
-                🔔 <strong>Ative as notificações</strong> para não perder nenhum conteúdo especial!
-            </p>
+            <div class="controles-video">
+                <button class="btn-video" onclick="reproduzirVideo()">▶️ Reproduzir</button>
+                <button class="btn-video" onclick="pausarVideo()">⏸️ Pausar</button>
+                <button class="btn-video" onclick="telaCheia()">⛶ Tela Cheia</button>
+            </div>
         </section>
 
         <!-- Notícias -->
@@ -503,6 +498,29 @@
                 btn.style.background = '#00aa00';
                 btn.onclick = null;
             }, 1500);
+        }
+        
+        // Controles do vídeo
+        function reproduzirVideo() {
+            const iframe = document.querySelector('.video-container-single iframe');
+            const url = iframe.src;
+            iframe.src = url.replace('autoplay=0', 'autoplay=1') + '&autoplay=1';
+        }
+        
+        function pausarVideo() {
+            const iframe = document.querySelector('.video-container-single iframe');
+            iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
+        }
+        
+        function telaCheia() {
+            const iframe = document.querySelector('.video-container-single iframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
         }
         
         // Atualizar hora
