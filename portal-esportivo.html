@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esporte Total - Portal Avançado</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="css/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Estilos personalizados para a página avançada */
+        .portal-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 60px 0 40px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .stats-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2196f3;
+            margin-bottom: 10px;
+        }
+        
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .match-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2196f3;
+            transition: all 0.3s;
+        }
+        
+        .match-card:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        .team-flag {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .highlight-video {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .news-ticker {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .ticker-item {
+            padding: 8px 0;
+            border-bottom: 1px dashed #dee2e6;
+        }
+        
+        .ticker-item:last-child {
+            border-bottom: none;
+        }
+        
+        .player-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .player-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Avançado -->
+    <header class="portal-header">
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="me-3">
+                            <svg width="60" height="60" viewBox="0 0 100 100">
+                                <defs>
+                                    <linearGradient id="portalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#2196f3;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#1976d2;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="50" cy="50" r="45" fill="url(#portalGradient)" stroke="#fff" stroke-width="3"/>
+                                <path d="M30 35 L70 35 L50 65 Z" fill="#fff"/>
+                                <path d="M40 50 L60 50" stroke="#fff" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="display-5 fw-bold mb-1">Portal Esportivo</h1>
+                            <p class="lead mb-0">Análises avançadas e estatísticas em tempo real</p>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-4">Cobertura completa com dados precisos, vídeos exclusivos e interatividade total para o verdadeiro fã de esportes.</p>
+                    
+                    <!-- Menu Hamburguer Mobile -->
+                    <nav class="topnav d-lg-none mb-3" id="myTopnav">
+                        <a href="javascript:void(0);" class="hamburguer-icon" onclick="toggleMenu()">
+                            <i class="fas fa-bars me-2"></i>Menu do Portal
+                        </a>
+                        <div id="myLinks">
+                            <a href="index.html"><i class="fas fa-home me-2"></i>Início</a>
+                            <a href="futebol.html"><i class="fas fa-futbol me-2"></i>Futebol</a>
+                            <a href="basquete.html"><i class="fas fa-basketball-ball me-2"></i>Basquete</a>
+                            <a href="bootstrap.html" class="ativo"><i class="fas fa-rocket me-2"></i>Portal Avançado</a>
+                            <a href="contato.html"><i class="fas fa-envelope me-2"></i>Contato</a>
+                        </div>
+                    </nav>
+                </div>
+                
+                <div class="col-lg-4 text-center">
+                    <div class="stats-card">
+                        <div class="stats-number" id="liveMatches">12</div>
+                        <div class="text-muted">Jogos ao vivo agora</div>
+                        <div class="mt-3">
+                            <span class="live-badge" style="position: static; display: inline-block;">AO VIVO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-principal">
+        <!-- Menu Desktop -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white rounded-3 shadow-sm mb-5 d-none d-lg-flex">
+            <div class="container-fluid">
+                <div class="navbar-nav mx-auto">
+                    <a class="nav-link mx-3 fw-semibold" href="index.html">
+                        <i class="fas fa-home me-2"></i>Início
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold" href="futebol.html">
+                        <i class="fas fa-futbol me-2"></i>Futebol
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold" href="basquete.html">
+                        <i class="fas fa-basketball-ball me-2"></i>Basquete
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold active" href="bootstrap.html">
+                        <i class="fas fa-chart-line me-2"></i>Portal Avançado
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link mx-3 fw-semibold dropdown-toggle" href="#" id="portalDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-cogs me-2"></i>Recursos
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#analises"><i class="fas fa-chart-bar me-2"></i>Análises</a>
+                            <a class="dropdown-item" href="#estatisticas"><i class="fas fa-calculator me-2"></i>Estatísticas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="contato.html"><i class="fas fa-envelope me-2"></i>Contato</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Ticker de Notícias ATUALIZADO -->
+        <div class="news-ticker">
+            <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-bullhorn text-primary me-2 fs-4"></i>
+                <h5 class="mb-0 fw-bold">Últimas Notícias</h5>
+                <span class="ms-auto text-muted"><i class="fas fa-sync-alt me-1"></i> Atualizado agora</span>
+            </div>
+            <div id="newsTicker">
+                <div class="ticker-item">
+                    <span class="badge bg-primary me-2">FUTEBOL</span>
+                    <span>Brasileirão 2026 começa em 28 de janeiro com novo formato</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="badge bg-success me-2">NBA</span>
+                    <span>Oklahoma City liderado por Shai Gilgeous-Alexander com recorde de 24-1</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="badge bg-danger me-2">F1</span>
+                    <span>Gabriel Bortoleto correrá pela Audi na F1 2026 ao lado de Hülkenberg</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="badge bg-primary me-2">FUTEBOL</span>
+                    <span>Palmeiras anuncia contratação de Marlon Freitas, do Botafogo</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="badge bg-success me-2">NBA</span>
+                    <span>Trae Young encerra quase 8 temporadas em Atlanta e vai para Washington</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="badge bg-danger me-2">F1</span>
+                    <span>Cadillac estreia como 11ª equipe na F1 2026 com Bottas e Pérez</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carrossel de Destaques ATUALIZADO -->
+        <section class="mb-5">
+            <h2 class="titulo-secao mb-4"><i class="fas fa-star me-2"></i>Destaques do Dia</h2>
+            
+            <div id="portalCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#portalCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#portalCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#portalCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#portalCarousel" data-bs-slide-to="3"></button>
+                </div>
+                <div class="carousel-inner rounded-4 overflow-hidden">
+                    <!-- Slide 1: Brasileirão 2026 -->
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                             class="d-block w-100" alt="Brasileirão 2026" style="height: 450px; object-fit: cover;">
+                        <div class="carousel-caption d-none d-md-block text-start" style="background: rgba(0,0,0,0.7); padding: 25px; border-radius: 10px;">
+                            <h3 class="display-6 fw-bold">Brasileirão 2026</h3>
+                            <p class="lead">Campeonato começa em 28 de janeiro com novo formato para pausar durante a Copa do Mundo.</p>
+                            <a href="futebol.html" class="btn btn-primary btn-lg mt-3">
+                                <i class="fas fa-futbol me-2"></i>Ver Tabela Completa
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Oklahoma City NBA -->
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                             class="d-block w-100" alt="Oklahoma City NBA" style="height: 450px; object-fit: cover;">
+                        <div class="carousel-caption d-none d-md-block text-start" style="background: rgba(0,0,0,0.7); padding: 25px; border-radius: 10px;">
+                            <h3 class="display-6 fw-bold">Oklahoma City Domina</h3>
+                            <p class="lead">Liderados por Shai Gilgeous-Alexander, OKC Thunder começam temporada com impressionante 24-1.</p>
+                            <a href="basquete.html" class="btn btn-success btn-lg mt-3">
+                                <i class="fas fa-chart-line me-2"></i>Ver Estatísticas
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Gabriel Bortoleto na F1 -->
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1546359634-a7b0d4cfe0a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                             class="d-block w-100" alt="Gabriel Bortoleto F1" style="height: 450px; object-fit: cover;">
+                        <div class="carousel-caption d-none d-md-block text-start" style="background: rgba(0,0,0,0.7); padding: 25px; border-radius: 10px;">
+                            <h3 class="display-6 fw-bold">Bortoleto na F1 2026</h3>
+                            <p class="lead">Brasileiro Gabriel Bortoleto correrá pela Audi ao lado de Nico Hülkenberg na temporada 2026.</p>
+                            <a href="#" class="btn btn-danger btn-lg mt-3">
+                                <i class="fas fa-flag-checkered me-2"></i>Ver Calendário F1
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4: Copa do Mundo 2026 -->
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1519861531473-920034658307?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                             class="d-block w-100" alt="Copa do Mundo 2026" style="height: 450px; object-fit: cover;">
+                        <div class="carousel-caption d-none d-md-block text-start" style="background: rgba(0,0,0,0.7); padding: 25px; border-radius: 10px;">
+                            <h3 class="display-6 fw-bold">Copa do Mundo 2026</h3>
+                            <p class="lead">Brasileirão 2026 terá pausa durante a Copa. Primeira edição com 48 seleções nos EUA, México e Canadá.</p>
+                            <a href="#" class="btn btn-warning btn-lg mt-3">
+                                <i class="fas fa-globe-americas me-2"></i>Ver Sedes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#portalCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#portalCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Seção de Recursos -->
+        <section class="mb-5" id="recursos">
+            <h2 class="titulo-secao mb-4"><i class="fas fa-tools me-2"></i>Recursos do Portal</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Análises Avançadas</h5>
+                            <p class="card-text text-muted">Estatísticas detalhadas, gráficos interativos e previsões baseadas em dados.</p>
+                            <a href="#analises" class="btn btn-outline-primary mt-2">
+                                Explorar <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Notícias Exclusivas</h5>
+                            <p class="card-text text-muted">Cobertura completa com informações em primeira mão e reportagens especiais.</p>
+                            <a href="#noticias" class="btn btn-outline-primary mt-2">
+                                Ler <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Comunidade</h5>
+                            <p class="card-text text-muted">Interaja com outros fãs, participe de debates e crie grupos de discussão.</p>
+                            <a href="#comunidade" class="btn btn-outline-primary mt-2">
+                                Participar <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">App Móvel</h5>
+                            <p class="card-text text-muted">Leve o portal no seu bolso. Notificações push e acesso offline.</p>
+                            <a href="#" class="btn btn-outline-primary mt-2" onclick="baixarApp()">
+                                Baixar <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estatísticas e Análises ATUALIZADO -->
+        <section class="mb-5" id="estatisticas">
+            <h2 class="titulo-secao mb-4"><i class="fas fa-chart-bar me-2"></i>Estatísticas em Destaque</h2>
+            
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number">24-1</div>
+                        <div>Recorde OKC Thunder</div>
+                        <div class="mt-2 text-muted small">Shai Gilgeous-Alexander (NBA)</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number">28/01</div>
+                        <div>Início Brasileirão</div>
+                        <div class="mt-2 text-muted small">Brasileirão 2026</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number">11</div>
+                        <div>Equipes na F1 2026</div>
+                        <div class="mt-2 text-muted small">Cadillac estreia</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number">128</div>
+                        <div>Times na Copinha</div>
+                        <div class="mt-2 text-muted small">Copinha 2026</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gráfico Simulado -->
+            <div class="bg-white rounded-3 p-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Recordes das Equipes - NBA 2025/26</h5>
+                    <select class="form-select w-auto">
+                        <option>Líderes da Temporada</option>
+                        <option>Últimos 10 jogos</option>
+                        <option>Toda temporada</option>
+                    </select>
+                </div>
+                <div class="text-center py-4 border rounded bg-light">
+                    <!-- Gráfico simulado com CSS/HTML -->
+                    <div class="d-flex align-items-end justify-content-around" style="height: 200px;">
+                        <div class="text-center">
+                            <div class="bg-primary rounded-top mx-auto" style="width: 30px; height: 180px;"></div>
+                            <div class="mt-2 small">OKC</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-success rounded-top mx-auto" style="width: 30px; height: 150px;"></div>
+                            <div class="mt-2 small">BOS</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-warning rounded-top mx-auto" style="width: 30px; height: 120px;"></div>
+                            <div class="mt-2 small">LAL</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-info rounded-top mx-auto" style="width: 30px; height: 90px;"></div>
+                            <div class="mt-2 small">GSW</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-danger rounded-top mx-auto" style="width: 30px; height: 70px;"></div>
+                            <div class="mt-2 small">MIL</div>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-3"><i>Gráfico interativo - Passe o mouse para ver detalhes</i></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jogadores em Destaque ATUALIZADO -->
+        <section class="mb-5" id="jogadores">
+            <h2 class="titulo-secao mb-4"><i class="fas fa-user-tie me-2"></i>Jogadores em Destaque</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="player-card">
+                        <div class="player-avatar">
+                            <i class="fas fa-basketball-ball"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">Shai Gilgeous</h5>
+                        <p class="text-muted small">Armador - Oklahoma City</p>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between small">
+                                <span>PPG:</span>
+                                <span class="fw-bold">31.2</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>APG:</span>
+                                <span class="fw-bold">6.5</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Recorde:</span>
+                                <span class="fw-bold">24-1</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-3 w-100" onclick="verPerfil('shai')">
+                            Ver Perfil Completo
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="player-card">
+                        <div class="player-avatar">
+                            <i class="fas fa-futbol"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">Marlon Freitas</h5>
+                        <p class="text-muted small">Meio-campista - Palmeiras</p>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between small">
+                                <span>Contratação:</span>
+                                <span class="fw-bold">2026</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Ex-clube:</span>
+                                <span class="fw-bold">Botafogo</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Posição:</span>
+                                <span class="fw-bold">Volante</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-3 w-100" onclick="verPerfil('marlon')">
+                            Ver Perfil Completo
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="player-card">
+                        <div class="player-avatar">
+                            <i class="fas fa-flag-checkered"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">Gabriel Bortoleto</h5>
+                        <p class="text-muted small">Piloto - Audi F1</p>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between small">
+                                <span>Temporada:</span>
+                                <span class="fw-bold">2026</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Equipe:</span>
+                                <span class="fw-bold">Audi</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Companheiro:</span>
+                                <span class="fw-bold">Hülkenberg</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-3 w-100" onclick="verPerfil('bortoleto')">
+                            Ver Perfil Completo
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="player-card">
+                        <div class="player-avatar">
+                            <i class="fas fa-basketball-ball"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">Neemias Queta</h5>
+                        <p class="text-muted small">Pivô - NBA</p>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between small">
+                                <span>Rebotes Of:</span>
+                                <span class="fw-bold">10</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Rebotes Def:</span>
+                                <span class="fw-bold">10</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Recorde:</span>
+                                <span class="fw-bold">Desde 1989</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-3 w-100" onclick="verPerfil('queta')">
+                            Ver Perfil Completo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notícias em Destaque -->
+        <section class="mb-5" id="noticias">
+            <h2 class="titulo-secao mb-4"><i class="fas fa-newspaper me-2"></i>Notícias em Destaque</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Brasileirão 2026</h5>
+                            <p class="card-text">O Campeonato Brasileiro 2026 terá início em 28 de janeiro com um novo formato. A competição começará mais cedo para permitir uma pausa durante a Copa do Mundo, que será realizada nos Estados Unidos, México e Canadá.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="badge bg-primary">FUTEBOL</span>
+                                <small class="text-muted">Publicado: 15/01/2026</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">NBA: Dominância do OKC</h5>
+                            <p class="card-text">Oklahoma City Thunder, liderado por Shai Gilgeous-Alexander, começou a temporada 2025/26 com um impressionante recorde de 24 vitórias e apenas 1 derrota, estabelecendo-se como principal candidato ao título.</p>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="badge bg-success">NBA</span>
+                                <small class="text-muted">Publicado: 14/01/2026</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Iframe Propaganda -->
+        <section class="mb-5">
+            <h3 class="titulo-secao mb-3"><i class="fas fa-ad me-2"></i>Patrocinador Oficial</h3>
+            <div class="iframe-container">
+                <iframe src="propaganda.html" class="iframe-propaganda"></iframe>
+            </div>
+        </section>
+
+        <!-- Comunidade -->
+        <section class="mb-5" id="comunidade">
+            <h2 class="titulo-secao mb-4"><i class="fas fa-users me-2"></i>Participe da Comunidade</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-comments fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title fw-bold">Fóruns de Discussão</h5>
+                            <p class="card-text">Debata os principais temas do mundo esportivo com outros fãs.</p>
+                            <a href="#" class="btn btn-primary" onclick="acessarForum()">
+                                <i class="fas fa-sign-in-alt me-2"></i>Acessar Fórum
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-poll fa-3x text-success mb-3"></i>
+                            <h5 class="card-title fw-bold">Enquetes e Votações</h5>
+                            <p class="card-text">Participe de pesquisas e vote nos melhores do mês.</p>
+                            <a href="#" class="btn btn-success" onclick="participarEnquete()">
+                                <i class="fas fa-vote-yea me-2"></i>Votar Agora
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                            <h5 class="card-title fw-bold">Bolões e Competições</h5>
+                            <p class="card-text">Crie seu bolão e dispute com amigos. Premiação garantida!</p>
+                            <a href="#" class="btn btn-warning" onclick="criarBolao()">
+                                <i class="fas fa-plus me-2"></i>Criar Bolão
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape-principal">
+        <div class="container-rodape">
+            <p class="texto-rodape">
+                &copy; <span id="anoAtual">2026</span> <strong>Portal Esportivo Avançado</strong> - Todos os direitos reservados
+            </p>
+            <p class="creditos">
+                Desenvolvido com tecnologia de ponta para amantes de esportes | 
+                <span id="contadorVisitas"></span>
+            </p>
+            <div class="links-rodape">
+                <a href="index.html"><i class="fas fa-home me-1"></i>Início</a> | 
+                <a href="futebol.html"><i class="fas fa-futbol me-1"></i>Futebol</a> | 
+                <a href="basquete.html"><i class="fas fa-basketball-ball me-1"></i>Basquete</a> |
+                <a href="contato.html"><i class="fas fa-envelope me-1"></i>Contato</a> |
+                <a href="#" onclick="alternarModoNoturno()"><i class="fas fa-moon me-1"></i>Modo Noturno</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Scripts Personalizados -->
+    <script src="js/menu.js"></script>
+    <script src="js/validacao.js"></script>
+    
+    <script>
+        // Funcionalidades específicas do portal avançado
+        
+        // Atualizar contador de jogos ao vivo
+        function atualizarContadorJogos() {
+            const elementos = document.querySelectorAll('#liveMatches');
+            const contador = Math.floor(Math.random() * 5) + 10; // 10-15 jogos
+            elementos.forEach(el => {
+                el.textContent = contador;
+            });
+        }
+        
+        // Iniciar atualização periódica
+        setInterval(atualizarContadorJogos, 30000); // Atualiza a cada 30 segundos
+        atualizarContadorJogos();
+        
+        // Funções interativas atualizadas
+        function baixarApp() {
+            mostrarNotificacao('📱 Redirecionando para download do app...');
+            setTimeout(() => {
+                alert('Em um site real, você seria redirecionado para a App Store ou Google Play.');
+            }, 500);
+        }
+        
+        function verMaisJogos() {
+            const jogosExtras = document.getElementById('jogosExtras');
+            if (!jogosExtras) {
+                const div = document.createElement('div');
+                div.id = 'jogosExtras';
+                div.className = 'row g-3 mt-3';
+                div.innerHTML = `
+                    <div class="col-12">
+                        <div class="match-card">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <div class="team-flag">🇵🇹</div>
+                                    <span class="fw-semibold">Sporting</span>
+                                </div>
+                                <div class="fs-5 fw-bold">1</div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="team-flag">🇵🇹</div>
+                                    <span class="fw-semibold">Benfica</span>
+                                </div>
+                                <div class="fs-5 fw-bold">1</div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted">75' - Segundo tempo</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.querySelector('#ao-vivo .col-lg-4').appendChild(div);
+            }
+        }
+        
+        function verPerfil(jogador) {
+            const perfis = {
+                'shai': {nome: 'Shai Gilgeous-Alexander', equipe: 'Oklahoma City Thunder', info: 'Líder da melhor campanha da NBA (24-1)'},
+                'marlon': {nome: 'Marlon Freitas', equipe: 'Palmeiras', info: 'Nova contratação do Verdão para 2026'},
+                'bortoleto': {nome: 'Gabriel Bortoleto', equipe: 'Audi F1', info: 'Primeira temporada na F1 em 2026'},
+                'queta': {nome: 'Neemias Queta', equipe: 'NBA', info: 'Primeiro jogador desde 1989 com 10 rebotes ofensivos e 10 defensivos'}
+            };
+            
+            const perfil = perfis[jogador];
+            mostrarNotificacao(`👤 Carregando perfil de ${perfil.nome}...`);
+            setTimeout(() => {
+                alert(`Perfil completo de ${perfil.nome}\n\nEquipe: ${perfil.equipe}\n\n${perfil.info}\n\nEm um site real, esta página mostraria:\n- Estatísticas detalhadas\n- Vídeos dos melhores momentos\n- Histórico de carreira\n- Próximos compromissos`);
+            }, 800);
+        }
+        
+        function acessarForum() {
+            mostrarNotificacao('💬 Redirecionando para os fóruns...');
+        }
+        
+        function participarEnquete() {
+            const enquete = `
+                🏆 ENQUETE DO MÊS 🏆
+                
+                Quem será o campeão do Brasileirão 2026?
+                
+                1. Palmeiras
+                2. Flamengo
+                3. Botafogo
+                4. Outro
+            `;
+            
+            const resposta = prompt(enquete + '\n\nDigite o número da sua opção:');
+            if (resposta) {
+                alert('✅ Seu voto foi registrado! Obrigado por participar.');
+            }
+        }
+        
+        function criarBolao() {
+            const nome = prompt('🎯 Digite o nome do seu bolão:');
+            if (nome) {
+                alert(`✅ Bolão "${nome}" criado com sucesso!\n\nCompartilhe o código: BOL${Math.floor(Math.random()*10000)} com seus amigos.`);
+            }
+        }
+        
+        function mostrarNotificacao(mensagem) {
+            // Criar notificação simples
+            const notificacao = document.createElement('div');
+            notificacao.textContent = mensagem;
+            notificacao.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #333;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                z-index: 9999;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s, fadeOut 0.3s 2.7s;
+            `;
+            
+            document.body.appendChild(notificacao);
+            
+            setTimeout(() => {
+                notificacao.remove();
+            }, 3000);
+        }
+        
+        // Inicializar tooltips do Bootstrap
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+            
+            // Atualizar ticker de notícias
+            const ticker = document.getElementById('newsTicker');
+            if (ticker) {
+                setInterval(() => {
+                    const items = ticker.querySelectorAll('.ticker-item');
+                    if (items.length > 0) {
+                        const primeiro = items[0];
+                        ticker.removeChild(primeiro);
+                        ticker.appendChild(primeiro);
+                    }
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

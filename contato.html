@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Esporte Total</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .pagina-contato .cabecalho-principal {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+        }
+        
+        .info-contato {
+            background: #e3f2fd;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .info-icon {
+            font-size: 1.5em;
+            width: 40px;
+            height: 40px;
+            background: #0066cc;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .validacao-demo {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .resultado-validacao {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .valido {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .invalido {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body class="pagina-contato">
+    <!-- Header -->
+    <header class="cabecalho-principal">
+        <div class="container-header">
+            <div class="logo-container">
+                <svg class="logo-svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#17a2b8" stroke="#ffffff" stroke-width="3"/>
+                    <path d="M30 40 L70 40 L50 70 Z M35 60 L65 60" fill="none" stroke="#ffffff" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" stroke-width="2"/>
+                </svg>
+                <h1 class="titulo-site">Esporte Total</h1>
+            </div>
+            <h2 class="subtitulo-site">📞 Entre em Contato Conosco</h2>
+            
+            <!-- Menu Hamburguer Mobile -->
+            <nav class="topnav" id="myTopnav">
+                <a href="javascript:void(0);" class="hamburguer-icon" onclick="toggleMenu()">
+                    ☰ Menu Contato
+                </a>
+                <div id="myLinks">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="futebol.html">⚽ Futebol</a>
+                    <a href="basquete.html">🏀 Basquete</a>
+                    <a href="bootstrap.html">🚀 Bootstrap</a>
+                    <a href="contato.html" class="ativo">📞 Contato</a>
+                </div>
+            </nav>
+            
+            <!-- Menu Desktop -->
+            <nav class="menu-nav">
+                <a href="index.html" class="link-nav">🏠 Home</a>
+                <a href="futebol.html" class="link-nav">⚽ Futebol</a>
+                <a href="basquete.html" class="link-nav">🏀 Basquete</a>
+                <a href="bootstrap.html" class="link-nav">🚀 Bootstrap</a>
+                <div class="dropdown">
+                    <a href="contato.html" class="link-nav ativo">📞 Contato ▾</a>
+                    <div class="dropdown-content">
+                        <a href="#formulario">📝 Formulário</a>
+                        <a href="#validacao">✓ Validação</a>
+                        <a href="#mapa">🗺️ Localização</a>
+                        <a href="#info">ℹ️ Informações</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container-principal">
+        <!-- Informações de Contato -->
+        <section id="info" class="info-contato">
+            <h2 class="titulo-secao" style="color: #17a2b8;">ℹ️ Informações de Contato</h2>
+            
+            <div class="grid-container">
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <div>
+                        <h4 style="margin: 0;">E-mail</h4>
+                        <p>contato@esportetotal.com</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">📱</div>
+                    <div>
+                        <h4 style="margin: 0;">Telefone</h4>
+                        <p>(68) 99999-9999</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🏢</div>
+                    <div>
+                        <h4 style="margin: 0;">Endereço</h4>
+                        <p>Rua dos Esportistas, 456 - Bosque, Rio Branco/AC</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">⏰</div>
+                    <div>
+                        <h4 style="margin: 0;">Horário</h4>
+                        <p>Segunda a Sexta: 9h às 18h</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Contato -->
+        <section id="formulario">
+            <h2 class="titulo-secao">📝 Formulário de Contato</h2>
+            
+            <div class="form-container">
+                <form id="formContato" method="POST" action="https://formsubmit.co/seu-email@exemplo.com">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome completo" required>
+                        <div class="error-message" id="nomeError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com" required>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone (DDD + Número) *</label>
+                        <input type="text" id="telefone" name="telefone" class="form-control" 
+                               placeholder="(68) 99999-9999" required
+                               oninput="formatarTelefoneInput(this)">
+                        <div class="error-message" id="telefoneError"></div>
+                        <small style="color: #666; font-size: 0.85em;">Formato: (XX) XXXXX-XXXX</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpf">CPF *</label>
+                        <input type="text" id="cpf" name="cpf" class="form-control" 
+                               placeholder="123.456.789-09" required
+                               oninput="formatarCPFInput(this)">
+                        <div class="error-message" id="cpfError"></div>
+                        <small style="color: #666; font-size: 0.85em;">Formato: XXX.XXX.XXX-XX</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="esporte">Esporte de Interesse *</label>
+                        <select id="esporte" name="esporte" class="form-control" required>
+                            <option value="">Selecione seu esporte favorito...</option>
+                            <option value="futebol">⚽ Futebol</option>
+                            <option value="basquete">🏀 Basquete</option>
+                            <option value="volei">🏐 Vôlei</option>
+                            <option value="tenis">🎾 Tênis</option>
+                            <option value="outro">Outro esporte</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assunto">Assunto *</label>
+                        <select id="assunto" name="assunto" class="form-control" required>
+                            <option value="">Selecione o assunto...</option>
+                            <option value="duvida">❓ Dúvida</option>
+                            <option value="sugestao">💡 Sugestão</option>
+                            <option value="reclamacao">⚠️ Reclamação</option>
+                            <option value="parceria">🤝 Parceria</option>
+                            <option value="outro">📌 Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" class="form-control" rows="5" 
+                                  placeholder="Digite sua mensagem aqui..." required></textarea>
+                        <div class="error-message" id="mensagemError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                            <label class="form-check-label" for="newsletter">
+                                📩 Desejo receber notícias e novidades por e-mail
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" onclick="validarFormulario(event)">
+                        📤 Enviar Mensagem
+                    </button>
+                </form>
+                
+                <div id="successMessage" class="success-message">
+                    ✅ Mensagem enviada com sucesso! Entraremos em contato em breve.
+                </div>
+            </div>
+        </section>
+
+        <!-- Validação JavaScript -->
+        <section id="validacao" class="mt-5">
+            <h2 class="titulo-secao">✓ Validação JavaScript</h2>
+            <p>Teste as funcionalidades de validação implementadas com JavaScript:</p>
+            
+            <div class="grid-container">
+                <!-- Validação de CPF -->
+                <div class="validacao-demo">
+                    <h4>🔍 Validação de CPF</h4>
+                    <p>Digite um CPF para testar a validação:</p>
+                    <input type="text" id="cpfTeste" class="form-control" placeholder="123.456.789-09"
+                           oninput="formatarCPFInput(this)">
+                    <button onclick="validarCPFTeste()" class="btn-submit mt-3">
+                        ✅ Validar CPF
+                    </button>
+                    <div id="cpfResultado" class="resultado-validacao"></div>
+                    
+                    <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                        <strong>📝 Regras de Validação:</strong>
+                        <ul style="margin: 10px 0 0 20px;">
+                            <li>Deve ter 11 dígitos numéricos</li>
+                            <li>Não pode ter todos os números iguais</li>
+                            <li>Dígitos verificadores devem estar corretos</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Validação de Telefone -->
+                <div class="validacao-demo">
+                    <h4>📱 Validação de Telefone</h4>
+                    <p>Digite um telefone para testar a validação:</p>
+                    <input type="text" id="telTeste" class="form-control" placeholder="(68) 99999-9999"
+                           oninput="formatarTelefoneInput(this)">
+                    <button onclick="validarTelefoneTeste()" class="btn-submit mt-3">
+                        ✅ Validar Telefone
+                    </button>
+                    <div id="telResultado" class="resultado-validacao"></div>
+                    
+                    <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                        <strong>📝 Formatos Aceitos:</strong>
+                        <ul style="margin: 10px 0 0 20px;">
+                            <li>(68) 99999-9999 (celular)</li>
+                            <li>(68) 9999-9999 (fixo)</li>
+                            <li>68 99999-9999 (sem parênteses)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Modificação CSS com JS -->
+                <div class="validacao-demo">
+                    <h4>🎨 Modificar CSS com JavaScript</h4>
+                    <p>Altere o tema da página:</p>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <button onclick="alterarTema('claro')" class="btn-submit">
+                            🌞 Tema Claro
+                        </button>
+                        <button onclick="alterarTema('escuro')" class="btn-submit">
+                            🌙 Tema Escuro
+                        </button>
+                        <button onclick="alterarTema('esportivo')" class="btn-submit">
+                            ⚽ Tema Esportivo
+                        </button>
+                        <button onclick="resetarTema()" class="btn-submit">
+                            🔄 Tema Original
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                        <strong>⚡ Funcionalidades JavaScript:</strong>
+                        <ul style="margin: 10px 0 0 20px;">
+                            <li>Altera cores do site</li>
+                            <li>Modifica estilos CSS</li>
+                            <li>Interatividade completa</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Outras Funcionalidades JS -->
+                <div class="validacao-demo">
+                    <h4>⚡ Mais Funcionalidades</h4>
+                    <p>Teste outras funcionalidades JavaScript:</p>
+                    
+                    <button onclick="mostrarOcultar('demoContent')" class="btn-submit mb-3">
+                        👁️ Mostrar/Ocultar Conteúdo
+                    </button>
+                    
+                    <button onclick="contarCaracteres()" class="btn-submit mb-3">
+                        🔢 Contar Caracteres
+                    </button>
+                    
+                    <button onclick="formatarData()" class="btn-submit">
+                        📅 Mostrar Data Atual
+                    </button>
+                    
+                    <div id="demoContent" style="display: none; margin-top: 15px; padding: 15px; background: white; border-radius: 8px;">
+                        <p>🎯 Conteúdo mostrado por JavaScript!</p>
+                        <p>Esta funcionalidade demonstra como o JS pode modificar o HTML dinamicamente.</p>
+                    </div>
+                    
+                    <div id="contadorCaracteres" style="margin-top: 10px; font-size: 0.9em;"></div>
+                    <div id="dataAtual" style="margin-top: 10px; font-size: 0.9em;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapa -->
+        <section id="mapa" class="mt-5">
+            <h2 class="titulo-secao">🗺️ Nossa Localização</h2>
+            
+            <div class="grid-container">
+                <div>
+                    <h4>📍 Endereço</h4>
+                    <p><strong>Esporte Total - Amazônia Esportiva</strong></p>
+                    <p>Rua dos Esportistas, 456 - Bosque</p>
+                    <p>Rio Branco - AC, 69900-000</p>
+                    
+                    <div style="margin-top: 20px;">
+                        <h5>📞 Contatos Adicionais</h5>
+                        <p>📧 suporte@esportetotal.com</p>
+                        <p>📱 WhatsApp: (68) 98888-8888</p>
+                        <p>🌐 Site: www.esportetotal.com</p>
+                    </div>
+                    
+                    <div style="margin-top: 20px; background: #e8f5e9; padding: 15px; border-radius: 8px;">
+                        <h5 style="color: #2e7d32; margin-top: 0;">🏆 Sobre Nossa Localização</h5>
+                        <p style="margin-bottom: 5px;">📌 <strong>Rio Branco, Acre</strong></p>
+                        <p style="font-size: 0.9em; margin-bottom: 5px;">Capital do estado do Acre, localizada na região Norte do Brasil</p>
+                        <p style="font-size: 0.9em; margin-bottom: 0;">🌳 <em>"O portal da Amazônia para o esporte brasileiro"</em></p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>🗺️ Mapa de Localização - Rio Branco/AC</h4>
+                    <div style="width: 100%; height: 300px; border-radius: 10px; overflow: hidden;">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.5071035509117!2d-67.82678868467917!3d-9.643875193094932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x917e3b7c9f5a0d1f%3A0x9e4332b0b5c1e5b8!2sRio%20Branco%2C%20AC!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr"
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen=""
+                            loading="lazy"
+                            title="Mapa de Rio Branco, Acre">
+                        </iframe>
+                    </div>
+                    
+                    <div style="margin-top: 15px; background: #f0f8ff; padding: 15px; border-radius: 8px;">
+                        <h5 style="color: #0066cc; margin-top: 0;">📍 Como chegar:</h5>
+                        <ul style="margin: 10px 0 0 20px; font-size: 0.9em;">
+                            <li><strong>De carro:</strong> Acesso pela BR-364</li>
+                            <li><strong>De ônibus:</strong> Terminal Urbano de Rio Branco</li>
+                            <li><strong>De avião:</strong> Aeroporto Internacional de Rio Branco</li>
+                            <li><strong>Bairro Bosque:</strong> Região central da cidade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Iframe com Propaganda -->
+        <section class="mt-5">
+            <h3 class="titulo-secao">💰 Patrocinador Oficial</h3>
+            <div class="iframe-container">
+                <iframe src="propaganda.html" class="iframe-propaganda"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape-principal">
+        <div class="container-rodape">
+            <p class="texto-rodape">
+                &copy; <span id="anoAtual">2026</span> <strong>Esporte Total</strong> - Contato
+            </p>
+            <p class="creditos">
+                Formulário com validação JavaScript completa | 
+                <span id="contadorVisitas"></span>
+            </p>
+            <div class="links-rodape">
+                <a href="index.html">← Voltar para Home</a> | 
+                <a href="futebol.html">⚽ Futebol</a> | 
+                <a href="basquete.html">🏀 Basquete</a> |
+                <a href="#" onclick="alternarModoNoturno()">🌙 Modo Noturno</a>
+            </div>
+            
+            <div style="margin-top: 15px; font-size: 0.85em; color: #666; text-align: center;">
+                <p>📍 <strong>Sede:</strong> Esporte Total - Rua dos Esportistas, 456 - Bosque, Rio Branco - AC, 69900-000</p>
+                <p>📞 <strong>Central de Atendimento:</strong> (68) 3222-5555 | ✉️ contato@esportetotal.com</p>
+                <p>⏰ <strong>Horário de Funcionamento:</strong> Segunda a Sexta, das 9h às 18h (horário do Acre)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/validacao.js"></script>
+    <script src="js/menu.js"></script>
+    
+    <script>
+        // Funções específicas da página de contato
+        
+        function formatarCPFInput(input) {
+            let value = input.value.replace(/\D/g, '');
+            
+            if (value.length > 3 && value.length <= 6) {
+                value = value.replace(/^(\d{3})(\d+)/, '$1.$2');
+            } else if (value.length > 6 && value.length <= 9) {
+                value = value.replace(/^(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
+            } else if (value.length > 9) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4');
+            }
+            
+            input.value = value.substring(0, 14);
+        }
+        
+        function formatarTelefoneInput(input) {
+            let value = input.value.replace(/\D/g, '');
+            
+            if (value.length > 2 && value.length <= 7) {
+                value = value.replace(/^(\d{2})(\d+)/, '($1) $2');
+            } else if (value.length > 7) {
+                if (value.length <= 10) {
+                    value = value.replace(/^(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
+                } else {
+                    value = value.replace(/^(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
+                }
+            } else if (value.length === 2) {
+                value = `(${value}) `;
+            }
+            
+            input.value = value.substring(0, 15);
+        }
+        
+        function validarFormulario(event) {
+            event.preventDefault();
+            
+            // Validação do formulário principal
+            const cpf = document.getElementById('cpf').value;
+            const telefone = document.getElementById('telefone').value;
+            
+            let valido = true;
+            
+            // Validar CPF
+            if (!validarCPF(cpf)) {
+                document.getElementById('cpfError').textContent = 'CPF inválido';
+                document.getElementById('cpfError').style.display = 'block';
+                valido = false;
+            } else {
+                document.getElementById('cpfError').style.display = 'none';
+            }
+            
+            // Validar Telefone
+            if (!validarTelefone(telefone)) {
+                document.getElementById('telefoneError').textContent = 'Telefone inválido. Use o formato: (XX) XXXXX-XXXX';
+                document.getElementById('telefoneError').style.display = 'block';
+                valido = false;
+            } else {
+                document.getElementById('telefoneError').style.display = 'none';
+            }
+            
+            if (valido) {
+                // Simular envio
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                
+                // Resetar formulário após 3 segundos
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    document.getElementById('formContato').reset();
+                }, 3000);
+            }
+        }
+        
+        // Funções de demonstração
+        function mostrarOcultar(id) {
+            const elemento = document.getElementById(id);
+            if (elemento.style.display === 'none' || elemento.style.display === '') {
+                elemento.style.display = 'block';
+                elemento.style.animation = 'fadeIn 0.5s';
+            } else {
+                elemento.style.display = 'none';
+            }
+        }
+        
+        function contarCaracteres() {
+            const mensagem = document.getElementById('mensagem').value;
+            const contador = document.getElementById('contadorCaracteres');
+            contador.innerHTML = `<strong>📊 Contagem:</strong> ${mensagem.length} caracteres, ${mensagem.split(' ').filter(w => w.length > 0).length} palavras`;
+        }
+        
+        function formatarData() {
+            const agora = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'America/Rio_Branco'
+            };
+            const dataFormatada = agora.toLocaleDateString('pt-BR', options);
+            document.getElementById('dataAtual').innerHTML = `<strong>📅 Data atual (Acre):</strong> ${dataFormatada}`;
+        }
+        
+        function resetarTema() {
+            document.body.classList.remove('tema-claro', 'tema-escuro', 'tema-esportivo');
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+            
+            const header = document.querySelector('.cabecalho-principal');
+            header.style.background = 'linear-gradient(135deg, #17a2b8 0%, #138496 100%)';
+        }
+        
+        // Função para mostrar informações sobre o Acre
+        function mostrarInfoAcre() {
+            alert('🏝️ **Rio Branco - Acre**\n\n' +
+                  '📍 Capital do estado do Acre\n' +
+                  '🌳 Localizada na região Norte do Brasil\n' +
+                  '🌎 Fuso horário: GMT-5 (horário do Acre)\n' +
+                  '📞 DDD: 68\n' +
+                  '🏆 Cidade conhecida pelo amor ao esporte!');
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            formatarData();
+            
+            // Atualizar ano atual no footer
+            document.getElementById('anoAtual').textContent = new Date().getFullYear();
+            
+            // Adicionar botão de informações do Acre
+            const mapaSection = document.querySelector('#mapa');
+            const infoButton = document.createElement('button');
+            infoButton.innerHTML = '🏝️ Sobre Rio Branco/AC';
+            infoButton.style.marginTop = '15px';
+            infoButton.style.padding = '8px 16px';
+            infoButton.style.background = 'linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%)';
+            infoButton.style.color = 'white';
+            infoButton.style.border = 'none';
+            infoButton.style.borderRadius = '5px';
+            infoButton.style.cursor = 'pointer';
+            infoButton.onclick = mostrarInfoAcre;
+            
+            const mapaDiv = mapaSection.querySelector('.grid-container > div:first-child');
+            mapaDiv.appendChild(infoButton);
+        });
+    </script>
+</body>
+</html>
