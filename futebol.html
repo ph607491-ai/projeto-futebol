@@ -3,60 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Futebol - Esporte Total</title>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2300aa00' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M50 10 L55 25 L70 25 L58 35 L63 50 L50 40 L37 50 L42 35 L30 25 L45 25 Z' fill='%23fff'/%3E%3C/svg%3E">
-    
-    <link rel="stylesheet" href="estilo.css">
-    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilo.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .pagina-futebol .cabecalho-principal {
+            background: linear-gradient(135deg, #00aa00 0%, #008800 100%);
+        }
+        
+        .destaque-verde {
+            background: #e8f5e8;
+            border-left: 5px solid #00aa00;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .jogo-ao-vivo {
+            background: #ff4444;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            animation: piscar 2s infinite;
+            margin: 10px 0;
+        }
+        
+        @keyframes piscar {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .placar-time {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .escudo-time {
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body>
+<body class="pagina-futebol">
+    <!-- Header -->
     <header class="cabecalho-principal">
         <div class="container-header">
             <div class="logo-container">
-                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <svg class="logo-svg" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="45" fill="#00aa00" stroke="#ffffff" stroke-width="3"/>
-                    <path d="M50 10 L55 25 L70 25 L58 35 L63 50 L50 40 L37 50 L42 35 L30 25 L45 25 Z" 
-                            fill="#ffffff"/>
+                    <path d="M50 10 L55 25 L70 25 L58 35 L63 50 L50 40 L37 50 L42 35 L30 25 L45 25 Z" fill="#ffffff"/>
                     <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" stroke-width="2"/>
                 </svg>
                 <h1 class="titulo-site">Esporte Total</h1>
             </div>
-            
             <h2 class="subtitulo-site">⚽ Cobertura Completa de Futebol</h2>
             
+            <!-- Menu Hamburguer Mobile -->
+            <nav class="topnav" id="myTopnav">
+                <a href="javascript:void(0);" class="hamburguer-icon" onclick="toggleMenu()">
+                    ☰ Menu Futebol
+                </a>
+                <div id="myLinks">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="futebol.html" class="ativo">⚽ Futebol</a>
+                    <a href="basquete.html">🏀 Basquete</a>
+                    <a href="bootstrap.html">🌐 Portal Esportivo</a>
+                    <a href="contato.html">📞 Contato</a>
+                </div>
+            </nav>
+            
+            <!-- Menu Desktop -->
             <nav class="menu-nav">
                 <a href="index.html" class="link-nav">🏠 Home</a>
                 <a href="futebol.html" class="link-nav ativo">⚽ Futebol</a>
                 <a href="basquete.html" class="link-nav">🏀 Basquete</a>
-                <a href="index.html#curiosidades" class="link-nav">⚡ Curiosidades</a>
+                <a href="bootstrap.html" class="link-nav">🌐 Portal Esportivo</a>
+                <div class="dropdown">
+                    <a href="contato.html" class="link-nav">📞 Contato ▾</a>
+                    <div class="dropdown-content">
+                        <a href="contato.html#formulario">📝 Formulário</a>
+                        <a href="contato.html#validacao">✓ Validação</a>
+                        <a href="contato.html#mapa">🗺️ Localização</a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
 
     <main class="container-principal">
-        
+        <!-- Menu de Navegação Interna -->
+        <section class="menu-dashboard">
+            <h3>🔍 Navegue pelo Futebol:</h3>
+            <div class="dashboard-grid">
+                <a href="#brasileirao" class="dashboard-card">
+                    <div class="dashboard-icon">🇧🇷</div>
+                    <h4>Brasileirão</h4>
+                    <p>Tabela completa 2025</p>
+                </a>
+                
+                <a href="#internacional" class="dashboard-card">
+                    <div class="dashboard-icon">🌎</div>
+                    <h4>Internacional</h4>
+                    <p>Champions e Libertadores</p>
+                </a>
+                
+                <a href="#noticias" class="dashboard-card">
+                    <div class="dashboard-icon">📰</div>
+                    <h4>Notícias</h4>
+                    <p>Últimas do futebol</p>
+                </a>
+                
+                <a href="#videos" class="dashboard-card">
+                    <div class="dashboard-icon">🎥</div>
+                    <h4>Vídeos</h4>
+                    <p>Melhores momentos</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Jogo ao Vivo (Simulado) -->
+        <div class="jogo-ao-vivo" id="jogoAoVivo">
+            <strong>⚽ JOGO AO VIVO AGORA:</strong> Flamengo 2 x 1 Palmeiras | 35' 2º Tempo
+            <button onclick="atualizarPlacar()" style="margin-left: 15px; padding: 5px 10px; background: white; color: #ff4444; border: none; border-radius: 5px; cursor: pointer;">
+                🔄 Atualizar
+            </button>
+        </div>
+
         <section class="secao-destaque" id="brasileirao">
-            <h2 class="titulo-secao">🇧🇷 Campeonato Brasileiro Série A</h2>
+            <h2 class="titulo-secao">🇧🇷 Campeonato Brasileiro Série A 2025</h2>
             
             <article class="card-futebol">
-                <h3 class="titulo-card">📊 Classificação Atual</h3>
+                <h3 class="titulo-card">📊 Retrospectiva e Classificação Final</h3>
                 <p class="texto-card">
-                    O <strong>Palmeiras</strong> mantém a liderança do Brasileirão 2025 com <em>61 pontos</em>, 
-                    conquistados em 28 jogos. Após perder o confronto direto contra o Flamengo, que também soma 61 pontos, 
-                    a equipe alviverde garante a ponta pelo critério de desempate, somando 19 vitórias contra 18 do rival. 
-                    A reta final da competição promete ser a mais emocionante dos últimos anos.
+                    A temporada de 2025 terminou com o <strong>Flamengo</strong> levantando a taça. O grande "fenômeno" do ano foi o <strong>Mirassol</strong>, que desbancou gigantes e garantiu sua vaga histórica na Libertadores de 2026.
                 </p>
 
-                <p class="texto-card destaque-info">
-                    🔥 <strong>Artilheiro:</strong> Kaio Jorge (Cruzeiro) - 15 gols<br>
-                    🥅 <strong>Melhor defesa:</strong> Flamengo - 15 gols sofridos
-                </p>
+                <div class="destaque-verde">
+                    🔥 <strong>Artilheiro 2025:</strong> Kaio Jorge (Cruzeiro) - 21 gols<br>
+                    🥅 <strong>Melhor defesa:</strong> Flamengo - 27 gols sofridos<br>
+                    ⭐ <strong>Revelação:</strong> Rayan (Vasco) - 19 anos
+                </div>
             </article>
 
+            <!-- Iframe Propaganda -->
+            <div class="iframe-container">
+                <iframe src="propaganda.html" class="iframe-propaganda"></iframe>
+            </div>
+
+            <!-- Tabela do Brasileirão -->
             <div class="tabela-responsiva">
+                <h4>📈 Classificação Final - Série A 2025</h4>
                 <table class="tabela-ranking">
                     <thead>
                         <tr>
@@ -75,261 +182,238 @@
                     <tbody>
                         <tr class="posicao-libertadores">
                             <td>1º</td>
-                            <td><strong>Palmeiras</strong></td>
-                            <td>61</td>
-                            <td>28</td>
-                            <td>19</td>
-                            <td>4</td>
+                            <td><strong>Flamengo</strong></td>
+                            <td>79</td>
+                            <td>38</td>
+                            <td>23</td>
+                            <td>10</td>
                             <td>5</td>
-                            <td>53</td>
-                            <td>26</td>
-                            <td>+27</td>
+                            <td>78</td>
+                            <td>27</td>
+                            <td>+51</td>
                         </tr>
                         <tr class="posicao-libertadores">
                             <td>2º</td>
-                            <td><strong>Flamengo</strong></td>
-                            <td>61</td>
-                            <td>28</td>
-                            <td>18</td>
+                            <td><strong>Palmeiras</strong></td>
+                            <td>76</td>
+                            <td>38</td>
+                            <td>23</td>
                             <td>7</td>
-                            <td>3</td>
-                            <td>56</td>
-                            <td>15</td>
-                            <td>+41</td>
+                            <td>8</td>
+                            <td>66</td>
+                            <td>33</td>
+                            <td>+33</td>
                         </tr>
                         <tr class="posicao-libertadores">
                             <td>3º</td>
                             <td><strong>Cruzeiro</strong></td>
-                            <td>56</td>
-                            <td>29</td>
-                            <td>16</td>
-                            <td>8</td>
-                            <td>5</td>
-                            <td>42</td>
-                            <td>21</td>
-                            <td>+21</td>
+                            <td>70</td>
+                            <td>38</td>
+                            <td>19</td>
+                            <td>13</td>
+                            <td>6</td>
+                            <td>55</td>
+                            <td>31</td>
+                            <td>+24</td>
                         </tr>
                         <tr class="posicao-libertadores">
                             <td>4º</td>
                             <td><strong>Mirassol</strong></td>
-                            <td>52</td>
-                            <td>29</td>
-                            <td>14</td>
-                            <td>10</td>
-                            <td>5</td>
-                            <td>50</td>
-                            <td>30</td>
-                            <td>+20</td>
+                            <td>67</td>
+                            <td>38</td>
+                            <td>18</td>
+                            <td>13</td>
+                            <td>7</td>
+                            <td>63</td>
+                            <td>39</td>
+                            <td>+24</td>
                         </tr>
                         <tr>
                             <td>5º</td>
-                            <td><strong>Botafogo</strong></td>
-                            <td>46</td>
-                            <td>29</td>
-                            <td>13</td>
+                            <td><strong>Fluminense</strong></td>
+                            <td>64</td>
+                            <td>38</td>
+                            <td>19</td>
                             <td>7</td>
-                            <td>9</td>
+                            <td>12</td>
+                            <td>50</td>
                             <td>39</td>
-                            <td>26</td>
-                            <td>+13</td>
+                            <td>+11</td>
                         </tr>
                         <tr>
                             <td>6º</td>
-                            <td><strong>Bahia</strong></td>
-                            <td>46</td>
-                            <td>28</td>
-                            <td>13</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>39</td>
-                            <td>32</td>
-                            <td>+7</td>
-                        </tr>
-                        <tr>
-                            <td>7º</td>
-                            <td><strong>Fluminense</strong></td>
-                            <td>41</td>
-                            <td>27</td>
-                            <td>12</td>
-                            <td>5</td>
-                            <td>10</td>
-                            <td>35</td>
-                            <td>33</td>
-                            <td>+2</td>
-                        </tr>
-                        <tr>
-                            <td>8º</td>
-                            <td><strong>São Paulo</strong></td>
+                            <td><strong>Botafogo</strong></td>
+                            <td>63</td>
                             <td>38</td>
-                            <td>29</td>
-                            <td>10</td>
-                            <td>8</td>
-                            <td>11</td>
-                            <td>31</td>
-                            <td>33</td>
-                            <td>-2</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <p class="legenda-tabela">
-                🟢 <span class="verde">Classificação para Libertadores</span> | 
-                PTS: Pontos | J: Jogos | V: Vitórias | E: Empates | D: Derrotas | 
-                GP: Gols Pró | GC: Gols Contra | SG: Saldo de Gols
-            </p>
-
-            <h4 class="titulo-card">⚽ Artilharia do Brasileirão 2025</h4>
-            <div class="tabela-responsiva">
-                <table class="tabela-ranking">
-                    <thead>
-                        <tr>
-                            <th>Pos.</th>
-                            <th>Jogador</th>
-                            <th>Time</th>
-                            <th>Gols</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>🥇</td>
-                            <td><strong>Giorgian de Arrascaeta</strong></td>
-                            <td>Flamengo</td>
-                            <td>15</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><strong>Kaio Jorge</strong></td>
-                            <td>Cruzeiro</td>
-                            <td>15</td>
-                        </tr>
-                        <tr>
-                            <td>🥈</td>
-                            <td><strong>Vitor Roque</strong></td>
-                            <td>Palmeiras</td>
-                            <td>13</td>
-                        </tr>
-                        <tr>
-                            <td>🥉</td>
-                            <td><strong>Vegetti</strong></td>
-                            <td>Vasco</td>
+                            <td>17</td>
                             <td>12</td>
+                            <td>9</td>
+                            <td>58</td>
+                            <td>38</td>
+                            <td>+20</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <p class="legenda-tabela">
+                🟢 <span class="verde">Classificação para Libertadores 2026</span> | 
+                🟡 Pré-Libertadores | 🔵 Sul-Americana | 🔴 Rebaixamento<br>
+                PTS: Pontos | J: Jogos | V: Vitórias | E: Empates | D: Derrotas
+            </p>
         </section>
 
+        <!-- Seção Internacional -->
         <section class="secao-internacional" id="internacional">
             <h3 class="titulo-secao">🌎 Futebol Internacional</h3>
-            
-            <article class="card-futebol">
-                <h4 class="titulo-card">⚽ Champions League 2025: Resultados da Fase de Grupos</h4>
-                
-                <p class="texto-card">
-                    A <em>Liga dos Campeões da Europa</em> deu início à sua Fase de Grupos!
-                    Os gigantes europeus voltaram a campo para as primeiras rodadas, buscando
-                    se posicionar bem desde o começo para garantir a vaga no mata-mata.
-                </p>
-                
-                <ul class="lista-jogos">
-                    <li>FR Mônaco 2 x 2 City ENG (Rodada 2)</li>
-                    <li>ES Villarreal 2 x 2 Juventus IT (Rodada 2)</li>
-                    <li>ES Barcelona 1 x 2 PSG FR (Rodada 2)</li>
-                    <li>ENG Arsenal 2 x 0 Olympiacos GR (Rodada 2)</li>
-                    <li>IT Napoli 2 x 1 Sporting PT (Rodada 2)</li>
-                    <li>GER Borussia 4 x 1 Ath. Bilbao ES (Rodada 2)</li>
-                </ul>
-            </article>
 
-            <article class="card-futebol">
-                <h4 class="titulo-card">🏆 Copa Libertadores da América: Semifinal Definida</h4>
+            <div class="grid-container">
+                <article class="grid-item">
+                    <h4>⚽ Champions League 2025</h4>
+                    <p><strong>Resultados - 09/12/2025:</strong></p>
+                    <ul class="lista-jogos">
+                        <li>Kairat 0 x 1 Olympiacos</li>
+                        <li>Bayern 3 x 1 Sporting</li>
+                        <li>Atalanta 2 x 1 Chelsea</li>
+                        <li>Mônaco 1 x 0 Galatasaray</li>
+                        <li>Union 2 x 3 Olympique</li>
+                        <li>PSV 2 x 3 Atlético Madrid</li>
+                    </ul>
+                </article>
                 
-                <p class="texto-card">
-                    A Libertadores 2025 chega à fase mais decisiva! Os duelos de ida e volta da semifinal
-                    colocam LDU (Equador) contra Palmeiras (Brasil) e Flamengo (Brasil) contra Racing Club (Argentina),
-                    buscando as duas vagas na grande final.
-                </p>
-
-                <h5 class="titulo-card-sub">🗓️ Confrontos (Ida e Volta)</h5>
-                <ul class="lista-jogos">
-                    <li>🇪🇨 LDU x Palmeiras 🇧🇷 (Ida: 23/10) / Palmeiras x LDU (Volta: 30/10)</li>
-                    <li>🇧🇷 Flamengo x Racing 🇦🇷 (Ida: 22/10) / Racing x Flamengo (Volta: 29/10)</li>
-                </ul>
-                
-                <div class="botao-container">
-                    <a href="https://ge.globo.com/futebol/libertadores/" target="_blank" class="botao-destaque">
-                        Ver Tabela Completa →
-                    </a>
-                </div>
-            </article>
+                <article class="grid-item">
+                    <h4>🏆 Libertadores 2026</h4>
+                    <p><strong>Times Brasileiros Classificados:</strong></p>
+                    <ol style="padding-left: 20px;">
+                        <li>Flamengo (Campeão Brasileiro)</li>
+                        <li>Palmeiras (Vice-campeão)</li>
+                        <li>Cruzeiro (3º colocado)</li>
+                        <li>Mirassol (4º colocado)</li>
+                        <li>Fluminense (5º colocado)</li>
+                    </ol>
+                    <p class="destaque-info" style="margin-top: 10px;">
+                        ⏳ Sorteio dos grupos: 15/03/2026
+                    </p>
+                </article>
+            </div>
         </section>
 
-        <section class="secao-noticias" id="noticias">
-            <h3 class="titulo-secao">📰 Últimas Notícias</h3>
-            
+        <!-- Vídeo do YouTube -->
+        <section id="videos">
+            <h3 class="titulo-secao">🎥 Melhores Momentos do Futebol</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Cy8N2L8_e2I" 
+                        title="Melhores Momentos do Futebol" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Notícias -->
+        <section id="noticias">
+            <h3 class="titulo-secao">🔥 Notícias em Destaque (Janeiro 2026)</h3>
             <div class="grid-noticias">
-                <a href="https://www.cnnbrasil.com.br/esportes/futebol/flamengo/samuel-lino-e-o-reforco-mais-caro-da-historia-do-flamengo-veja-ranking/" target="_blank" rel="noopener" class="card-noticia-link">
+                <a href="https://www.lance.com.br/copa-do-mundo/2026-e-ano-de-copa-do-mundo-veja-como-estao-os-preparativos-para-o-maior-evento-do-futebol.html" target="_blank" rel="noopener" class="card-noticia-link">
                     <div class="card-noticia">
-                        <h5>🔴 Flamengo anuncia reforços</h5>
-                        <p>Samuel Lino é a contratação mais cara da história do clube carioca</p>
-                        <small>📅 30/07/2025 - CNN Brasil</small>
+                        <h5>🏆 2026 é Ano de Copa do Mundo!</h5>
+                        <p>Confira os preparativos para o Mundial nos EUA, México e Canadá.</p>
+                        <small>📅 01/01/2026 - Lance!</small>
                         <span class="link-indicador">Ler mais →</span>
                     </div>
                 </a>
-                
-                <a href="https://www.cnnbrasil.com.br/esportes/futebol/palmeiras/2030-abel-ferreira-define-condicoes-para-renovar-com-o-palmeiras/" target="_blank" rel="noopener" class="card-noticia-link">
+                <a href="https://www.santosfc.com.br/menino-da-vila-gabigol-esta-de-volta-ao-santos-fc/" target="_blank" rel="noopener" class="card-noticia-link">
                     <div class="card-noticia">
-                        <h5>🟢 Abel Ferreira pode renovar até 2030</h5>
-                        <p>Técnico português define condições para nova renovação com Palmeiras</p>
-                        <small>📅 16/09/2024 - CNN Brasil</small>
+                        <h5>🐳 Gabigol está de Volta ao Santos!</h5>
+                        <p>O "Menino da Vila" retorna para casa para a temporada 2026.</p>
+                        <small>📅 03/01/2026 - Santos FC</small>
                         <span class="link-indicador">Ler mais →</span>
                     </div>
                 </a>
-                
-                <a href="https://www.goal.com/br/listas/jogadores-contratados-flamengo-temporada-2025/bltadea55132eb85c5b" target="_blank" rel="noopener" class="card-noticia-link">
+                <a href="https://br.bolavip.com/futebol/o-fenomeno-mirassol-a-arrancada-em-2025-que-levou-o-time-a-libertadores-em-2026" target="_blank" rel="noopener" class="card-noticia-link">
                     <div class="card-noticia">
-                        <h5>⚽ Mercado da bola 2025</h5>
-                        <p>Confira todos os jogadores contratados pelo Flamengo</p>
-                        <small>📅 31/01/2025 - Goal.com</small>
+                        <h5>🦁 O Fenômeno Mirassol</h5>
+                        <p>A arrancada que garantiu o time na Libertadores 2026.</p>
+                        <small>📅 05/01/2026 - Bolavip</small>
                         <span class="link-indicador">Ler mais →</span>
                     </div>
                 </a>
             </div>
-        </section>
-
-        <section class="secao-links-externos">
-            <h4 class="titulo-secao">🔗 Sites Oficiais</h4>
             
-            <div class="container-links">
-                <a href="https://www.cbf.com.br" target="_blank" rel="noopener" class="link-externo">
-                    🇧🇷 CBF - Confederação Brasileira de Futebol
-                </a>
-                <a href="https://www.uefa.com" target="_blank" rel="noopener" class="link-externo">
-                    🇪🇺 UEFA - Union of European Football Associations
-                </a>
-                <a href="https://www.conmebol.com" target="_blank" rel="noopener" class="link-externo">
-                    🌎 CONMEBOL - Confederação Sul-Americana
-                </a>
-                <a href="https://www.fifa.com" target="_blank" rel="noopener" class="link-externo">
-                    🌍 FIFA - Federação Internacional de Futebol
+            <!-- Botão para mais notícias -->
+            <div class="botao-container">
+                <a href="#" class="botao-destaque" onclick="carregarMaisNoticias()">
+                    📰 Carregar Mais Notícias
                 </a>
             </div>
         </section>
-
     </main>
 
     <footer class="rodape-principal">
         <div class="container-rodape">
             <p class="texto-rodape">
-                &copy; 2025 <strong>Esporte Total</strong> - Futebol
+                &copy; <span id="anoAtual">2026</span> <strong>Esporte Total</strong> - Futebol
+            </p>
+            <p class="creditos">
+                Dados atualizados em tempo real | 
+                <span id="contadorVisitas"></span>
             </p>
             <div class="links-rodape">
-                <a href="index.html">Home</a>
-                <a href="futebol.html">Futebol</a>
-                <a href="basquete.html">Basquete</a>
+                <a href="index.html">← Voltar para Home</a> | 
+                <a href="basquete.html">🏀 Ir para Basquete</a> | 
+                <a href="#" onclick="alternarModoNoturno()">🌙 Modo Noturno</a>
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="js/menu.js"></script>
+    <script src="js/validacao.js"></script>
+    
+    <script>
+        // Simulação de jogo ao vivo
+        let minuto = 35;
+        let tempo = '2º';
+        
+        function atualizarPlacar() {
+            minuto++;
+            if (minuto > 45 && tempo === '2º') {
+                minuto = 1;
+                tempo = 'Acréscimos';
+            }
+            
+            const placar = Math.random() > 0.7 ? '3 x 1' : '2 x 1';
+            document.getElementById('jogoAoVivo').innerHTML = `
+                <strong>⚽ JOGO AO VIVO AGORA:</strong> Flamengo ${placar} Palmeiras | ${minuto}' ${tempo}
+                <button onclick="atualizarPlacar()" style="margin-left: 15px; padding: 5px 10px; background: white; color: #ff4444; border: none; border-radius: 5px; cursor: pointer;">
+                    🔄 Atualizar
+                </button>
+            `;
+        }
+        
+        // Carregar mais notícias
+        function carregarMaisNoticias() {
+            const btn = document.querySelector('.botao-destaque');
+            btn.innerHTML = '⏳ Carregando...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '✅ Todas as notícias carregadas!';
+                btn.style.background = '#00aa00';
+                btn.onclick = null;
+            }, 1500);
+        }
+        
+        // Atualizar hora
+        function atualizarHora() {
+            const agora = new Date();
+            const hora = agora.toLocaleTimeString('pt-BR');
+            const elementosHora = document.querySelectorAll('.hora-atual');
+            elementosHora.forEach(el => {
+                el.textContent = `🕒 ${hora}`;
+            });
+        }
+        
+        setInterval(atualizarHora, 1000);
+        atualizarHora();
+    </script>
 </body>
 </html>
