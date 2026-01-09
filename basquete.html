@@ -3,148 +3,592 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Basquete - Esporte Total</title>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ff6b35' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M50 5 Q70 30 50 50 Q30 30 50 5 M50 95 Q70 70 50 50 Q30 70 50 95' fill='none' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M40 35 L50 45 L60 35 L50 25 Z M45 45 L55 45 L55 65 L45 65 Z' fill='%23ffd700'/%3E%3C/svg%3E">
-    
-    <link rel="stylesheet" href="estilo.css">
-    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilo.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .pagina-basquete .cabecalho-principal {
+            background: linear-gradient(135deg, #ff6b35 0%, #cc552a 100%);
+        }
+        
+        .cesta-destaque {
+            background: #fff0d9;
+            border: 2px dashed #ff6b35;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .jogador-destaque {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .foto-jogador {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #ff8855);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+        }
+        
+        /* Estilo para link de acessibilidade */
+        .link-acessibilidade {
+            background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+            color: white !important;
+            border: 2px solid #4CAF50;
+        }
+        
+        .link-acessibilidade:hover {
+            background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
+        }
+        
+        /* Dashboard card de acessibilidade */
+        .dashboard-card.acessibilidade {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+        }
+        
+        .dashboard-card.acessibilidade:hover {
+            background: linear-gradient(135deg, #C8E6C9 0%, #A5D6A7 100%);
+            border-color: #2E7D32;
+            transform: translateY(-5px);
+        }
+        
+        .dashboard-card.acessibilidade .dashboard-icon {
+            color: #2E7D32;
+        }
+        
+        .dashboard-card.acessibilidade h4 {
+            color: #1B5E20;
+        }
+    </style>
 </head>
-<body>
-    <header class="cabecalho-principal basquete-header">
+<body class="pagina-basquete">
+    <!-- Header -->
+    <header class="cabecalho-principal">
         <div class="container-header">
             <div class="logo-container">
-                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <svg class="logo-svg" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="45" fill="#ff6b35" stroke="#ffffff" stroke-width="3"/>
-                    <path d="M50 5 Q70 30 50 50 Q30 30 50 5 M50 95 Q70 70 50 50 Q30 70 50 95" 
-                            fill="none" stroke="#ffffff" stroke-width="2"/>
-                    <path d="M40 35 L50 45 L60 35 L50 25 Z M45 45 L55 45 L55 65 L45 65 Z" fill="#ffd700"/>
+                    <path d="M50 5 Q70 30 50 50 Q30 30 50 5 M50 95 Q70 70 50 50 Q30 70 50 95" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+                    <path d="M5 50 Q30 30 50 50 Q30 70 5 50 M95 50 Q70 30 50 50 Q70 70 95 50" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+                    <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" stroke-width="2"/>
+                    <path d="M40 35 L50 45 L60 35 L50 25 Z M45 45 L55 45 L55 65 L45 65 Z" fill="#ffd700" stroke="#ccaa00" stroke-width="1.5"/>
                 </svg>
                 <h1 class="titulo-site">Esporte Total</h1>
             </div>
+            <h2 class="subtitulo-site">🏀 Basquete: Copa Super 8 e NBA em Alta!</h2>
             
-            <h2 class="subtitulo-site">🏀 Cobertura Completa de Basquete</h2>
+            <!-- Menu Hamburguer Mobile -->
+            <nav class="topnav" id="myTopnav">
+                <a href="javascript:void(0);" class="hamburguer-icon" onclick="toggleMenu()">
+                    ☰ Menu Basquete
+                </a>
+                <div id="myLinks">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="futebol.html">⚽ Futebol</a>
+                    <a href="basquete.html" class="ativo">🏀 Basquete</a>
+                    <a href="acessibilidade.html" class="link-acessibilidade">♿ Acessibilidade</a>
+                    <a href="contato.html">📞 Contato</a>
+                </div>
+            </nav>
             
-            <nav class="menu-nav basquete-nav">
+            <!-- Menu Desktop -->
+            <nav class="menu-nav">
                 <a href="index.html" class="link-nav">🏠 Home</a>
                 <a href="futebol.html" class="link-nav">⚽ Futebol</a>
                 <a href="basquete.html" class="link-nav ativo">🏀 Basquete</a>
-                <a href="index.html#curiosidades" class="link-nav">⚡ Curiosidades</a>
+                <a href="acessibilidade.html" class="link-nav" style="background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);">♿ Acessibilidade</a>
+                <div class="dropdown">
+                    <a href="contato.html" class="link-nav">📞 Contato ▾</a>
+                    <div class="dropdown-content">
+                        <a href="contato.html#formulario">📝 Formulário</a>
+                        <a href="contato.html#validacao">✓ Validação</a>
+                        <a href="contato.html#mapa">🗺️ Localização</a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
 
     <main class="container-principal">
-        <section class="secao-destaque basquete-destaque" id="nba">
-            <h2 class="titulo-secao">🏆 NBA 2025: Pré-Temporada e Expectativas</h2>
-            
-            <article class="card-basquete">
-                <h3 class="titulo-card">🚀 Os Favoritos ao Título</h3>
-                <p class="texto-card">
-                    Com a temporada regular 2025-2026 da NBA se aproximando, 
-                    a expectativa é alta. O <strong>Boston Celtics</strong>, 
-                    atual campeão, reforçou sua rotação e é o principal favorito a 
-                    repetir o feito. O <strong>Denver Nuggets</strong>, 
-                    liderado por Nikola Jokic, e o <strong>Dallas Mavericks</strong>, 
-                    com Luka Doncic, são os grandes concorrentes na Conferência Oeste.
-                </p>
+        <!-- Menu de Navegação Interna -->
+        <section class="menu-dashboard">
+            <h3>🏀 Navegue pelo Basquete:</h3>
+            <div class="dashboard-grid">
+                <a href="#nbb" class="dashboard-card">
+                    <div class="dashboard-icon">🇧🇷</div>
+                    <h4>NBB</h4>
+                    <p>Campeonato Brasileiro</p>
+                </a>
+                
+                <a href="#nba" class="dashboard-card">
+                    <div class="dashboard-icon">🇺🇸</div>
+                    <h4>NBA</h4>
+                    <p>Liga Americana</p>
+                </a>
+                
+                <a href="#super8" class="dashboard-card">
+                    <div class="dashboard-icon">🏆</div>
+                    <h4>Super 8</h4>
+                    <p>Copa mata-mata</p>
+                </a>
+                
+                <a href="acessibilidade.html" class="dashboard-card acessibilidade">
+                    <div class="dashboard-icon">♿</div>
+                    <h4>Acessibilidade</h4>
+                    <p>Recursos inclusivos</p>
+                </a>
+            </div>
+        </section>
 
-                <p class="texto-card destaque-info">
-                    ✨ <strong>Melhor Jogador:</strong> Nikola Jokic (Denver Nuggets)<br>
-                    🛡️ <strong>Melhor Defesa:</strong> Minnesota Timberwolves
+        <!-- Jogador em Destaque -->
+        <div class="jogador-destaque">
+            <div class="foto-jogador">🏀</div>
+            <div>
+                <h4 style="margin: 0; color: #ff6b35;">⭐ JOGADOR DA SEMANA</h4>
+                <h3 style="margin: 5px 0;">David Sloan - Pinheiros</h3>
+                <p>Eleito melhor jogador de dezembro no NBB. Média: 17.7 pts, 6.2 ast</p>
+            </div>
+        </div>
+
+        <section class="secao-destaque" id="nbb">
+            <h2 class="titulo-secao">🏀 NBB 2025/26: Pinheiros Lidera</h2>
+
+            <article class="card-futebol">
+                <h3 class="titulo-card">🇧🇷 E.C. Pinheiros Termina 1º Turno no Topo!</h3>
+                <p class="texto-card">
+                    Com uma campanha brilhante de 17 vitórias em 19 jogos, o <strong>Pinheiros</strong> garantiu a liderança do primeiro turno do NBB CAIXA. O <strong>Flamengo</strong> segue na cola com a mesma pontuação, perdendo apenas no confronto direto.
                 </p>
+                
+                <div class="cesta-destaque">
+                    🗓️ <strong>Próximo Grande Evento:</strong> Copa Super 8 2026<br>
+                    📍 <strong>Local:</strong> Ginásio do Ibirapuera - SP<br>
+                    ⏰ <strong>Data:</strong> 24 a 31 de janeiro de 2026
+                </div>
             </article>
 
-            <h4 class="titulo-card">Principais Destaques do Início de Temporada</h4>
-            <div class="grid-basquete">
-                <div class="card-basquete-detalhe">
-                    <h5>Luka Doncic: Candidato a MVP</h5>
-                    <p>O astro esloveno do Mavericks entra na temporada como principal nome para o prêmio de MVP, após uma performance incrível nos playoffs de 2025.</p>
+            <!-- Iframe Propaganda -->
+            <div class="iframe-container">
+                <iframe src="propaganda.html" class="iframe-propaganda" title="Propaganda"></iframe>
+            </div>
+
+            <!-- Estatísticas -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">89.5%</div>
+                    <div class="stat-label">Aproveitamento Pinheiros</div>
                 </div>
-                <div class="card-basquete-detalhe">
-                    <h5>Trocas Bombásticas no Leste</h5>
-                    <p>Grandes movimentações ocorreram na Conferência Leste, com o New York Knicks e o Philadelphia 76ers se fortalecendo para desafiar o domínio do Celtics.</p>
+                <div class="stat-card">
+                    <div class="stat-number">17</div>
+                    <div class="stat-label">Vitórias em 19 jogos</div>
                 </div>
-                <div class="card-basquete-detalhe">
-                    <h5>Brasileiros na NBA</h5>
-                    <p>O Brasil segue representado por nomes como Raulzinho (Washington Wizards) e Gui Santos (Golden State Warriors), buscando espaço em suas equipes.</p>
+                <div class="stat-card">
+                    <div class="stat-number">36</div>
+                    <div class="stat-label">Pontos conquistados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">+12.3</div>
+                    <div class="stat-label">Saldo de pontos/jogo</div>
+                </div>
+            </div>
+
+            <!-- Tabela NBB -->
+            <div class="tabela-responsiva">
+                <h4>📈 Classificação - NBB 2025/26 (1º Turno)</h4>
+                <table class="tabela-ranking">
+                    <thead>
+                        <tr>
+                            <th>Pos.</th>
+                            <th>Time</th>
+                            <th>V</th>
+                            <th>D</th>
+                            <th>AP (%)</th>
+                            <th>P</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="posicao-libertadores">
+                            <td>1º</td>
+                            <td><strong>Pinheiros</strong></td>
+                            <td>17</td>
+                            <td>2</td>
+                            <td>89.5%</td>
+                            <td>36</td>
+                        </tr>
+                        <tr class="posicao-libertadores">
+                            <td>2º</td>
+                            <td><strong>Flamengo</strong></td>
+                            <td>17</td>
+                            <td>2</td>
+                            <td>89.5%</td>
+                            <td>36</td>
+                        </tr>
+                        <tr class="posicao-libertadores">
+                            <td>3º</td>
+                            <td><strong>KTO Minas</strong></td>
+                            <td>16</td>
+                            <td>3</td>
+                            <td>84.2%</td>
+                            <td>35</td>
+                        </tr>
+                        <tr class="posicao-libertadores">
+                            <td>4º</td>
+                            <td><strong>Sesi Franca</strong></td>
+                            <td>16</td>
+                            <td>3</td>
+                            <td>84.2%</td>
+                            <td>35</td>
+                        </tr>
+                        <tr>
+                            <td>5º</td>
+                            <td><strong>CAIXA Brasília</strong></td>
+                            <td>14</td>
+                            <td>5</td>
+                            <td>73.7%</td>
+                            <td>33</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="legenda-tabela">
+                🔵 <span style="color: #0066cc;">Classificados para a Copa Super 8 2026</span> <br>
+                V: Vitórias | D: Derrotas | AP: Aproveitamento | P: Pontos
+            </p>
+        </section>
+
+        <!-- Copa Super 8 -->
+        <section id="super8">
+            <h3 class="titulo-secao">🏆 Copa Super 8 2026</h3>
+            
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>🗓️ Cruzamentos das Quartas</h4>
+                    <ul class="lista-jogos">
+                        <li><strong>Jogo 1:</strong> Flamengo vs São José</li>
+                        <li><strong>Jogo 2:</strong> Pinheiros vs Paulistano</li>
+                        <li><strong>Jogo 3:</strong> Minas vs Corinthians</li>
+                        <li><strong>Jogo 4:</strong> Franca vs Brasília</li>
+                    </ul>
+                    <p style="margin-top: 10px;">
+                        <strong>📅 Datas:</strong> 24 a 25 de janeiro<br>
+                        <strong>🏟️ Local:</strong> Ginásio do Ibirapuera, SP<br>
+                        <strong>🎫 Ingressos:</strong> A partir de R$ 50,00
+                    </p>
+                </div>
+                
+                <div class="grid-item">
+                    <h4>⚡ Regras do Torneio</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Mata-mata em jogo único</li>
+                        <li>Vencedor avança às semifinais</li>
+                        <li>Final em jogo único</li>
+                        <li>MVP recebe troféu especial</li>
+                        <li>Premiação total: R$ 500.000</li>
+                    </ul>
+                    <div class="botao-container" style="margin-top: 15px;">
+                        <button class="botao-destaque" onclick="comprarIngresso()">
+                            🎫 Comprar Ingresso
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
-        
-        <section class="secao-internacional" id="euroliga">
-            <h3 class="titulo-secao">🇪🇺 Basquete Europeu</h3>
-            
-            <article class="card-basquete">
-                <h4 class="titulo-card">🏀 Euroliga: Os Gigantes Dominam</h4>
-                
+
+        <!-- NBA -->
+        <section class="secao-internacional" id="nba">
+            <h3 class="titulo-secao">🌎 Giro NBA: Temporada 2025/26</h3>
+
+            <article class="card-futebol">
+                <h4 class="titulo-card">🌟 OKC Thunder Defende o Trono</h4>
                 <p class="texto-card">
-                    A Turkish Airlines EuroLeague 2025-2026 começou com os favoritos 
-                    reafirmando sua força. O <strong>Real Madrid</strong>, 
-                    campeão de 2023, e o <strong>Fenerbahçe</strong>, atual campeão turco, 
-                    lideram seus respectivos grupos e são os times a serem batidos.
+                    Após conquistar seu primeiro título em 2025, o <strong>Oklahoma City Thunder</strong> continua dominando a Conferência Oeste em janeiro de 2026. O destaque foi a vitória dos Lakers sobre os Grizzlies.
                 </p>
-                
-                <h5 class="titulo-card-sub">Jogos de Destaque da Rodada</h5>
+
+                <div class="stats-container">
+                    <div class="stat-card" style="background: #f0f8ff;">
+                        <div class="stat-number" style="color: #552583;">32-8</div>
+                        <div class="stat-label">Thunder (1º Oeste)</div>
+                    </div>
+                    <div class="stat-card" style="background: #f8f0ff;">
+                        <div class="stat-number" style="color: #007DC5;">30-10</div>
+                        <div class="stat-label">Celtics (1º Leste)</div>
+                    </div>
+                    <div class="stat-card" style="background: #fff0f0;">
+                        <div class="stat-number" style="color: #CE1141;">42.5</div>
+                        <div class="stat-label">PPG - L. Dončić</div>
+                    </div>
+                </div>
+
+                <h5 style="margin-top: 20px;">📅 Próximos Jogos NBA:</h5>
                 <ul class="lista-jogos">
-                    <li>Real Madrid 88 x 75 Anadolu Efes</li>
-                    <li>Olympiacos 79 x 81 Barcelona</li>
-                    <li>Maccabi Tel Aviv 95 x 85 Partizan Belgrade</li>
-                    <li>AS Mônaco 83 x 70 Virtus Segafredo Bologna</li>
+                    <li>Wizards vs Pelicans (09/01)</li>
+                    <li>Celtics vs Raptors (09/01)</li>
+                    <li>Magic vs 76ers (09/01)</li>
+                    <li>Nets vs Clippers (09/01)</li>
                 </ul>
             </article>
         </section>
 
-        <section class="secao-noticias" id="noticias">
-            <h3 class="titulo-secao">📰 Últimas Notícias</h3>
-            
+        <!-- Vídeo do YouTube -->
+        <section id="videos">
+            <h3 class="titulo-secao">🎥 Melhores Momentos do Basquete</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/XjJWBQK3bTI" 
+                        title="Melhores Momentos da NBA" 
+                        allowfullscreen
+                        aria-label="Vídeo dos melhores momentos da NBA">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Notícias -->
+        <section id="noticias">
+            <h3 class="titulo-secao">🔥 Notícias de Basquete (Janeiro 2026)</h3>
             <div class="grid-noticias">
-                <a href="https://www.espn.com.br/nba/artigo/_/id/12711082/lakers-x-clippers-no-natal-2025-rodada-nba-tem-cinco-jogos-no-dia-25" target="_blank" class="card-noticia-link">
+                <a href="https://lnb.com.br/noticias/copa-super-8-2026-cruzamentos-sao-definidos-apos-o-fim-do-primeiro-turno-do-nbb-caixa-2025-26/" target="_blank" class="card-noticia-link">
                     <div class="card-noticia">
-                        <h5>🎄 Jogos de Natal da NBA 2025 definidos</h5>
-                        <p>A rodada especial do dia 25 de dezembro terá cinco grandes confrontos, incluindo Lakers x Clippers.</p>
-                        <small>📅 23/10/2025 - 09:00</small>
-                        <span class="link-indicador">Ler na ESPN →</span>
-                    </div>
-                </a>
-                
-                <a href="https://theplayoffs.com.br/nba/pre-temporada-lakers-derrotam-warriors-no-classico-da-california/" target="_blank" class="card-noticia-link">
-                    <div class="card-noticia">
-                        <h5>🔥 Lakers x Warriors: vitória em clássico de pré-temporada</h5>
-                        <p>Lakers garantem a vitória em um clássico de pré-temporada.</p>
-                        <small>📅 13/10/2025 - 19:30</small>
-                        <span class="link-indicador">Ler no The Playoffs →</span>
+                        <h5>🏆 Super 8: Cruzamentos Definidos!</h5>
+                        <p>Veja os confrontos das quartas de final do torneio que agita o basquete nacional.</p>
+                        <small>📅 05/01/2026 - LNB</small>
+                        <span class="link-indicador">Ler mais →</span>
                     </div>
                 </a>
 
-                <a href="https://ge.globo.com/basquete/nba/noticia/2025/10/10/com-dores-no-nervo-ciatico-lebron-james-desfalcara-os-lakers-no-inicio-da-temporada-da-nba.ghtml" target="_blank" class="card-noticia-link">
+                <a href="https://www.infomoney.com.br/esportes/nba-e-fiba-anunciam-nova-liga-de-basquete-na-europa-para-2026/" target="_blank" class="card-noticia-link">
                     <div class="card-noticia">
-                        <h5>🤕 Lesão: LeBron James desfalca Lakers no início da temporada</h5>
-                        <p>O astro sentiu dores no nervo ciático e ficará afastado das primeiras partidas.</p>
-                        <small>📅 10/10/2025 - 12:00</small>
+                        <h5>🇪🇺 NBA e FIBA: Nova Liga na Europa</h5>
+                        <p>Parceria oficial visa criar uma liga europeia com apoio da NBA a partir de 2026.</p>
+                        <small>📅 02/01/2026 - InfoMoney</small>
+                        <span class="link-indicador">Ler mais →</span>
+                    </div>
+                </a>
+
+                <a href="https://www.cbb.com.br/noticia/5099/2026-selecoes-brasileiras-em-acao-da-base-ao-adulto-do-3x3-ao-5x5" target="_blank" class="card-noticia-link">
+                    <div class="card-noticia">
+                        <h5>🇧🇷 Brasil 2026: Calendário Cheio</h5>
+                        <p>Expectativas para as Seleções Brasileiras, desde as Eliminatórias até o Mundial.</p>
+                        <small>📅 05/01/2026 - CBB</small>
+                        <span class="link-indicador">Ler mais →</span>
                     </div>
                 </a>
             </div>
         </section>
 
+        <!-- Formulário de Torcida -->
+        <section style="background: linear-gradient(135deg, #ff6b35, #ff8855); padding: 30px; border-radius: 15px; margin: 30px 0; color: white;">
+            <h3 style="color: white;">📣 Qual seu time do coração no basquete?</h3>
+            <form onsubmit="enviarTorcida(event)" style="margin-top: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <input type="text" placeholder="Seu nome" required 
+                           style="padding: 12px; border: none; border-radius: 8px;"
+                           aria-label="Digite seu nome">
+                    <select required style="padding: 12px; border: none; border-radius: 8px;" aria-label="Selecione seu time de basquete">
+                        <option value="">Selecione seu time</option>
+                        <option value="pinheiros">Pinheiros</option>
+                        <option value="flamengo">Flamengo</option>
+                        <option value="minas">Minas</option>
+                        <option value="franca">Franca</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <button type="submit" 
+                        style="margin-top: 15px; padding: 12px 30px; background: white; color: #ff6b35; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;"
+                        aria-label="Enviar torcida para o time escolhido">
+                    🏀 Enviar Minha Torcida
+                </button>
+            </form>
+        </section>
+        
+        <!-- Botão de Acessibilidade Fixo -->
+        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <a href="acessibilidade.html" 
+               style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); color: white; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: all 0.3s;"
+               onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';"
+               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';">
+                ♿ Acessibilidade
+            </a>
+        </div>
     </main>
+
     <footer class="rodape-principal">
         <div class="container-rodape">
             <p class="texto-rodape">
-                &copy; 2025 <strong>Esporte Total</strong>. Todos os direitos reservados.
+                &copy; <span id="anoAtual">2026</span> <strong>Esporte Total</strong> - Basquete
             </p>
             <p class="creditos">
-                Desenvolvido com 💙 para amantes do esporte
+                Dados atualizados em tempo real | 
+                <span id="contadorVisitas"></span>
             </p>
-        
             <div class="links-rodape">
-                <a href="index.html">Home</a>
-                <a href="futebol.html">Futebol</a>
-                <a href="basquete.html">Basquete</a>
+                <a href="index.html">← Voltar para Home</a> | 
+                <a href="futebol.html">⚽ Ir para Futebol</a> | 
+                <a href="acessibilidade.html">♿ Acessibilidade</a> | 
+                <a href="#" onclick="alternarModoNoturno()">🌙 Modo Noturno</a>
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="js/menu.js"></script>
+    <script src="js/validacao.js"></script>
+    <script src="js/acessibilidade.js"></script>
+    
+    <script>
+        // Atualizar ano atual
+        document.getElementById('anoAtual').textContent = new Date().getFullYear();
+        
+        // Comprar ingresso
+        function comprarIngresso() {
+            const nome = prompt("Para comprar ingressos, digite seu nome:");
+            if (nome) {
+                alert(`🎫 Obrigado, ${nome}! Em breve entraremos em contato com os detalhes da compra.`);
+            }
+        }
+        
+        // Enviar torcida
+        function enviarTorcida(event) {
+            event.preventDefault();
+            alert('🏀 Obrigado por mostrar sua torcida! Sua escolha foi registrada.');
+            event.target.reset();
+        }
+        
+        // Contador de pontos
+        let pontosPinheiros = 0;
+        let pontosFlamengo = 0;
+        
+        function atualizarPontuacao() {
+            pontosPinheiros += Math.floor(Math.random() * 3);
+            pontosFlamengo += Math.floor(Math.random() * 3);
+            
+            const placar = document.getElementById('placarSuper8');
+            if (placar) {
+                placar.innerHTML = `
+                    <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                        <h4>⚡ Placar Simulado - Super 8</h4>
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin: 15px 0;">
+                            <div>
+                                <div style="font-size: 1.5em;">🏀</div>
+                                <div style="font-size: 2em; font-weight: bold;">${pontosPinheiros}</div>
+                                <div>Pinheiros</div>
+                            </div>
+                            <div style="font-size: 2em;">×</div>
+                            <div>
+                                <div style="font-size: 1.5em;">🏀</div>
+                                <div style="font-size: 2em; font-weight: bold;">${pontosFlamengo}</div>
+                                <div>Flamengo</div>
+                            </div>
+                        </div>
+                        <button onclick="atualizarPontuacao()" style="padding: 8px 20px; background: #ff6b35; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            ➕ Adicionar Ponto
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
+        // Inicializar placar
+        setTimeout(() => {
+            atualizarPontuacao();
+        }, 1000);
+        
+        // Alternar modo noturno
+        function alternarModoNoturno() {
+            document.body.classList.toggle('modo-noturno');
+            localStorage.setItem('modoNoturno', document.body.classList.contains('modo-noturno'));
+            alert(document.body.classList.contains('modo-noturno') ? '🌙 Modo noturno ativado!' : '☀️ Modo claro ativado!');
+        }
+        
+        // Carregar modo noturno salvo
+        if (localStorage.getItem('modoNoturno') === 'true') {
+            document.body.classList.add('modo-noturno');
+        }
+        
+        // Menu responsivo
+        function toggleMenu() {
+            const links = document.getElementById('myLinks');
+            if (links.style.display === 'block') {
+                links.style.display = 'none';
+            } else {
+                links.style.display = 'block';
+            }
+        }
+        
+        // Contador de visitas (simulado)
+        const contador = document.getElementById('contadorVisitas');
+        if (contador) {
+            let visitas = localStorage.getItem('visitasBasquete') || 0;
+            visitas++;
+            localStorage.setItem('visitasBasquete', visitas);
+            contador.textContent = `Visitas: ${visitas}`;
+        }
+        
+        // Inicializar funcionalidades de acessibilidade
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar atributos ARIA para acessibilidade
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                if (!iframe.hasAttribute('title') && !iframe.hasAttribute('aria-label')) {
+                    iframe.setAttribute('aria-label', 'Conteúdo incorporado');
+                }
+            });
+            
+            // Adicionar skip link se não existir
+            if (!document.querySelector('.skip-link')) {
+                const skipLink = document.createElement('a');
+                skipLink.href = '#main-content';
+                skipLink.className = 'skip-link';
+                skipLink.textContent = 'Pular para conteúdo principal';
+                document.body.insertBefore(skipLink, document.body.firstChild);
+            }
+            
+            // Renomear main para ter id para o skip link
+            const main = document.querySelector('main');
+            if (main && !main.id) {
+                main.id = 'main-content';
+            }
+        });
+    </script>
 </body>
 </html>
