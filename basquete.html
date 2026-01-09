@@ -102,6 +102,91 @@
         .dashboard-card.acessibilidade h4 {
             color: #1B5E20;
         }
+        
+        /* Estilos para o vídeo único */
+        .video-unico-basquete {
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .video-container-unico {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            background: #000;
+        }
+        
+        .video-container-unico iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            display: block;
+        }
+        
+        .info-video-basquete {
+            background: white;
+            padding: 25px;
+            text-align: left;
+            border-top: 5px solid #ff6b35;
+        }
+        
+        .info-video-basquete h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .info-video-basquete p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .tag-video-basquete {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .controles-video-basquete {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn-video-basquete {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn-video-basquete:hover {
+            background: #cc552a;
+        }
+        
+        @media (max-width: 768px) {
+            .video-container-unico iframe {
+                height: 300px;
+            }
+            
+            .controles-video-basquete {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     </style>
 </head>
 <body class="pagina-basquete">
@@ -175,10 +260,10 @@
                     <p>Copa mata-mata</p>
                 </a>
                 
-                <a href="acessibilidade.html" class="dashboard-card acessibilidade">
-                    <div class="dashboard-icon">♿</div>
-                    <h4>Acessibilidade</h4>
-                    <p>Recursos inclusivos</p>
+                <a href="#video" class="dashboard-card">
+                    <div class="dashboard-icon">🎥</div>
+                    <h4>Vídeo</h4>
+                    <p>Momento especial</p>
                 </a>
             </div>
         </section>
@@ -371,15 +456,33 @@
             </article>
         </section>
 
-        <!-- Vídeo do YouTube -->
-        <section id="videos">
+        <!-- Seção de Vídeo Único -->
+        <section class="video-unico-basquete" id="video">
             <h3 class="titulo-secao">🎥 Melhores Momentos do Basquete</h3>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/XjJWBQK3bTI" 
-                        title="Melhores Momentos da NBA" 
-                        allowfullscreen
-                        aria-label="Vídeo dos melhores momentos da NBA">
+            <p>Assista a este vídeo especial com os momentos mais incríveis do basquete mundial!</p>
+            
+            <div class="video-container-unico">
+                <iframe 
+                    src="https://www.youtube.com/embed/Ft3MJEkfD0U?si=36fu4iP7PYTgATm2" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
                 </iframe>
+                
+                <div class="info-video-basquete">
+                    <h4>🌟 Momentos Épicos do Basquete Mundial</h4>
+                    <p>Reviva os lances mais marcantes do basquete, com enterradas incríveis, cestas de três pontos decisivas e jogadas geniais que ficaram para sempre na memória dos fãs do esporte.</p>
+                    <p><strong>Duração:</strong> 5:18 min | <strong>Visualizações:</strong> 2.1M</p>
+                    <span class="tag-video-basquete">NBA</span>
+                </div>
+            </div>
+            
+            <div class="controles-video-basquete">
+                <button class="btn-video-basquete" onclick="reproduzirVideoBasquete()">▶️ Reproduzir</button>
+                <button class="btn-video-basquete" onclick="pausarVideoBasquete()">⏸️ Pausar</button>
+                <button class="btn-video-basquete" onclick="telaCheiaBasquete()">⛶ Tela Cheia</button>
             </div>
         </section>
 
@@ -440,16 +543,6 @@
                 </button>
             </form>
         </section>
-        
-        <!-- Botão de Acessibilidade Fixo -->
-        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
-            <a href="acessibilidade.html" 
-               style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); color: white; padding: 12px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: all 0.3s;"
-               onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';"
-               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';">
-                ♿ Acessibilidade
-            </a>
-        </div>
     </main>
 
     <footer class="rodape-principal">
@@ -532,6 +625,29 @@
         setTimeout(() => {
             atualizarPontuacao();
         }, 1000);
+        
+        // Controles do vídeo
+        function reproduzirVideoBasquete() {
+            const iframe = document.querySelector('.video-container-unico iframe');
+            const url = iframe.src;
+            iframe.src = url.replace('autoplay=0', 'autoplay=1') + '&autoplay=1';
+        }
+        
+        function pausarVideoBasquete() {
+            const iframe = document.querySelector('.video-container-unico iframe');
+            iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
+        }
+        
+        function telaCheiaBasquete() {
+            const iframe = document.querySelector('.video-container-unico iframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
         
         // Alternar modo noturno
         function alternarModoNoturno() {
