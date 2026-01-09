@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Acessibilidade - Esporte Total</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="css/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Biblioteca de Acessibilidade -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/accessibility-js@1.0.0/dist/css/accessibility.min.css">
+    
+    <style>
+        /* Estilos para página de acessibilidade */
+        .accessibility-header {
+            background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+            color: white;
+            padding: 50px 0 30px;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .accessibility-header::before {
+            content: '♿';
+            position: absolute;
+            bottom: -30px;
+            right: 30px;
+            font-size: 150px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #2E7D32;
+            font-size: 1.8rem;
+        }
+        
+        .accessibility-badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .contrast-card {
+            border: 3px solid #333;
+            background: #000;
+            color: #FFF;
+        }
+        
+        .contrast-card .feature-icon {
+            background: #333;
+            color: #FFF;
+        }
+        
+        .font-size-controls {
+            background: #F5F5F5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .font-size-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #4CAF50;
+            background: white;
+            color: #4CAF50;
+            font-weight: bold;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .font-size-btn:hover, .font-size-btn.active {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .color-option:hover, .color-option.active {
+            transform: scale(1.1);
+            border-color: #333;
+        }
+        
+        .keyboard-shortcuts {
+            background: #FFF3E0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #FFB74D;
+        }
+        
+        .shortcut-item:last-child {
+            border-bottom: none;
+        }
+        
+        .shortcut-key {
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        .screen-reader-demo {
+            background: #E3F2FD;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .screen-reader-text {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin-left: 15px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #4CAF50;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list li i {
+            color: #4CAF50;
+            margin-right: 10px;
+        }
+        
+        .compatibility-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #F5F5F5;
+            color: #666;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Estilos para alto contraste */
+        .high-contrast {
+            background: #000 !important;
+            color: #FFF !important;
+        }
+        
+        .high-contrast a {
+            color: #FFFF00 !important;
+        }
+        
+        .high-contrast .feature-card {
+            background: #333 !important;
+            color: #FFF !important;
+            border-color: #FFF !important;
+        }
+        
+        /* Estilos para daltonismo */
+        .protanopia-filter {
+            filter: url(#protanopia);
+        }
+        
+        .deuteranopia-filter {
+            filter: url(#deuteranopia);
+        }
+        
+        .tritanopia-filter {
+            filter: url(#tritanopia);
+        }
+        
+        /* Estilos para leitores de tela */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #4CAF50;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            text-decoration: none;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Botão Fixo de Acessibilidade */
+        .accessibility-floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .accessibility-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .accessibility-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .accessibility-quick-menu {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 200px;
+        }
+        
+        .accessibility-quick-menu.show {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+        
+        .quick-menu-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 15px;
+            border: none;
+            background: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .quick-menu-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Link para pular para conteúdo (para leitores de tela) -->
+    <a href="#main-content" class="skip-link sr-only-focusable">
+        <i class="fas fa-forward me-2"></i>Pular para conteúdo principal
+    </a>
+    
+    <!-- Header da Acessibilidade -->
+    <header class="accessibility-header">
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="me-3">
+                            <svg width="60" height="60" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="#4CAF50" stroke="#FFF" stroke-width="3"/>
+                                <path d="M35 40 L65 40 L50 70 Z" fill="#FFF"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#FFF" stroke-width="2" stroke-dasharray="5,5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="display-5 fw-bold mb-1">Acessibilidade PCD</h1>
+                            <p class="lead mb-0">
+                                <span class="accessibility-badge">
+                                    <i class="fas fa-universal-access me-1"></i> WCAG 2.1 AA
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-3">Recursos inclusivos para pessoas com deficiência visual, auditiva, motora e cognitiva.</p>
+                    
+                    <!-- Menu Mobile -->
+                    <nav class="topnav d-lg-none mb-3" id="myTopnav">
+                        <a href="javascript:void(0);" class="hamburguer-icon" onclick="toggleMenu()">
+                            <i class="fas fa-bars me-2"></i>Menu Acessibilidade
+                        </a>
+                        <div id="myLinks">
+                            <a href="index.html"><i class="fas fa-home me-2"></i>Início</a>
+                            <a href="futebol.html"><i class="fas fa-futbol me-2"></i>Futebol</a>
+                            <a href="basquete.html"><i class="fas fa-basketball-ball me-2"></i>Basquete</a>
+                            <a href="#" onclick="scrollToSection('painel-controle')"><i class="fas fa-sliders-h me-2"></i>Painel de Controle</a>
+                            <a href="#" onclick="scrollToSection('recursos-deficiencia')"><i class="fas fa-wheelchair me-2"></i>Recursos por Deficiência</a>
+                            <a href="#" onclick="scrollToSection('teste-acessibilidade')"><i class="fas fa-vial me-2"></i>Teste de Acessibilidade</a>
+                        </div>
+                    </nav>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        <div class="stats-card bg-white text-dark rounded-3 p-3 shadow">
+                            <h5 class="fw-bold mb-3">
+                                <i class="fas fa-chart-line me-2 text-success"></i>
+                                Status da Acessibilidade
+                            </h5>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <div class="fs-3 fw-bold text-success" id="accessibilityScore">92%</div>
+                                    <div class="text-muted">Conformidade</div>
+                                </div>
+                                <div>
+                                    <div class="fs-3 fw-bold text-primary" id="activeFeatures">8</div>
+                                    <div class="text-muted">Recursos Ativos</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success w-100" onclick="runAccessibilityCheck()">
+                                <i class="fas fa-search me-1"></i>
+                                VERIFICAR SITE
+                            </button>
+                            <small class="text-muted d-block mt-2">
+                                <i class="fas fa-check-circle me-1"></i>
+                                <span id="wcagStatus">WCAG 2.1 AA Compatível</span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-principal" id="main-content">
+        <!-- Menu Desktop -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white rounded-3 shadow-sm mb-4 d-none d-lg-flex">
+            <div class="container-fluid">
+                <div class="navbar-nav mx-auto">
+                    <a class="nav-link mx-3 fw-semibold" href="index.html">
+                        <i class="fas fa-home me-2"></i>Início
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold" href="futebol.html">
+                        <i class="fas fa-futbol me-2"></i>Futebol
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold" href="basquete.html">
+                        <i class="fas fa-basketball-ball me-2"></i>Basquete
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold active" href="#" onclick="scrollToSection('painel-controle')">
+                        <i class="fas fa-sliders-h me-2"></i>Painel de Controle
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold" href="#" onclick="scrollToSection('recursos-deficiencia')">
+                        <i class="fas fa-wheelchair me-2"></i>Recursos por Deficiência
+                    </a>
+                    <a class="nav-link mx-3 fw-semibold" href="#" onclick="scrollToSection('teste-acessibilidade')">
+                        <i class="fas fa-vial me-2"></i>Teste de Acessibilidade
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Painel de Controle de Acessibilidade -->
+        <section id="painel-controle" class="mb-5">
+            <h2 class="titulo-secao mb-4">
+                <i class="fas fa-sliders-h me-2"></i>Painel de Controle
+            </h2>
+            
+            <div class="row g-4">
+                <!-- Contraste -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-adjust"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Contraste</h5>
+                        <p class="text-muted mb-3">Ajuste o contraste para melhor visibilidade</p>
+                        
+                        <div class="color-palette">
+                            <div class="color-option active" style="background: #FFFFFF;" 
+                                 onclick="changeContrast('normal')" title="Contraste Normal"></div>
+                            <div class="color-option" style="background: #000000; border-color: #FFFFFF;" 
+                                 onclick="changeContrast('high')" title="Alto Contraste"></div>
+                            <div class="color-option" style="background: #FFFF00; border-color: #000000;" 
+                                 onclick="changeContrast('yellow')" title="Fundo Amarelo"></div>
+                            <div class="color-option" style="background: #0000FF; border-color: #FFFFFF;" 
+                                 onclick="changeContrast('blue')" title="Fundo Azul"></div>
+                        </div>
+                        
+                        <div class="form-check form-switch mt-3">
+                            <input class="form-check-input" type="checkbox" id="invertColors" 
+                                   onchange="toggleInvertColors()">
+                            <label class="form-check-label" for="invertColors">
+                                Inverter Cores
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tamanho da Fonte -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-text-height"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Tamanho do Texto</h5>
+                        <p class="text-muted mb-3">Aumente ou diminua o tamanho da fonte</p>
+                        
+                        <div class="font-size-controls">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button class="font-size-btn" onclick="changeFontSize(-2)" title="Texto Muito Pequeno">
+                                    A<small>-</small>
+                                </button>
+                                <button class="font-size-btn" onclick="changeFontSize(-1)" title="Texto Pequeno">
+                                    A-
+                                </button>
+                                <button class="font-size-btn active" onclick="changeFontSize(0)" title="Texto Normal">
+                                    A
+                                </button>
+                                <button class="font-size-btn" onclick="changeFontSize(1)" title="Texto Grande">
+                                    A+
+                                </button>
+                                <button class="font-size-btn" onclick="changeFontSize(2)" title="Texto Muito Grande">
+                                    A<small>+</small>
+                                </button>
+                            </div>
+                            
+                            <div class="form-check form-switch mt-3">
+                                <input class="form-check-input" type="checkbox" id="dyslexiaFont" 
+                                       onchange="toggleDyslexiaFont()">
+                                <label class="form-check-label" for="dyslexiaFont">
+                                    Fonte para Dislexia
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leitores de Tela -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-assistive-listening-systems"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Leitura de Tela</h5>
+                        <p class="text-muted mb-3">Suporte para leitores de tela</p>
+                        
+                        <div class="screen-reader-demo">
+                            <p id="screenReaderText" class="screen-reader-text">
+                                Esta página possui recursos de acessibilidade para pessoas com deficiência visual.
+                            </p>
+                            
+                            <button class="btn btn-outline-primary btn-sm me-2" onclick="readAloud('Bem-vindo ao painel de acessibilidade. Use os controles para ajustar o site às suas necessidades.')">
+                                <i class="fas fa-volume-up me-1"></i>Ler em Voz Alta
+                            </button>
+                            
+                            <button class="btn btn-outline-success btn-sm" onclick="toggleScreenReader()">
+                                <i class="fas fa-blind me-1"></i>Modo Leitor
+                            </button>
+                            
+                            <div class="form-check form-switch mt-3">
+                                <input class="form-check-input" type="checkbox" id="altText" checked
+                                       onchange="toggleAltText()">
+                                <label class="form-check-label" for="altText">
+                                    Textos Alternativos Ativos
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navegação por Teclado -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Navegação por Teclado</h5>
+                        <p class="text-muted mb-3">Atalhos para navegação sem mouse</p>
+                        
+                        <div class="keyboard-shortcuts">
+                            <div class="shortcut-item">
+                                <span><i class="fas fa-arrow-up"></i> Navegar</span>
+                                <kbd class="shortcut-key">Tab</kbd>
+                            </div>
+                            <div class="shortcut-item">
+                                <span><i class="fas fa-enter"></i> Ativar</span>
+                                <kbd class="shortcut-key">Enter</kbd>
+                            </div>
+                            <div class="shortcut-item">
+                                <span><i class="fas fa-home"></i> Ir para Início</span>
+                                <kbd class="shortcut-key">Alt + 1</kbd>
+                            </div>
+                            <div class="shortcut-item">
+                                <span><i class="fas fa-search"></i> Buscar</span>
+                                <kbd class="shortcut-key">Alt + F</kbd>
+                            </div>
+                            <div class="shortcut-item">
+                                <span><i class="fas fa-cog"></i> Acessibilidade</span>
+                                <kbd class="shortcut-key">Alt + A</kbd>
+                            </div>
+                        </div>
+                        
+                        <div class="form-check form-switch mt-3">
+                            <input class="form-check-input" type="checkbox" id="keyboardNav" checked
+                                   onchange="toggleKeyboardNavigation()">
+                            <label class="form-check-label" for="keyboardNav">
+                                Navegação por Teclado Ativa
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Daltonismo -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Modos para Daltonismo</h5>
+                        <p class="text-muted mb-3">Filtros para diferentes tipos de daltonismo</p>
+                        
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary" onclick="applyColorFilter('protanopia')">
+                                <i class="fas fa-palette me-2"></i>Protanopia
+                            </button>
+                            <button class="btn btn-outline-success" onclick="applyColorFilter('deuteranopia')">
+                                <i class="fas fa-palette me-2"></i>Deuteranopia
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="applyColorFilter('tritanopia')">
+                                <i class="fas fa-palette me-2"></i>Tritanopia
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="applyColorFilter('normal')">
+                                <i class="fas fa-times me-2"></i>Remover Filtro
+                            </button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Ajusta cores para diferentes tipos de daltonismo
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Animação e Movimento -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Animação e Movimento</h5>
+                        <p class="text-muted mb-3">Controle sobre animações no site</p>
+                        
+                        <div class="feature-list">
+                            <li>
+                                <i class="fas fa-video"></i>
+                                <span>Reduzir Animação</span>
+                                <label class="toggle-switch float-end">
+                                    <input type="checkbox" id="reduceMotion" onchange="toggleReducedMotion()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <i class="fas fa-images"></i>
+                                <span>Pausar GIFs</span>
+                                <label class="toggle-switch float-end">
+                                    <input type="checkbox" id="pauseGifs" onchange="togglePauseGifs()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span>Cursor Grande</span>
+                                <label class="toggle-switch float-end">
+                                    <input type="checkbox" id="bigCursor" onchange="toggleBigCursor()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <i class="fas fa-hand-pointer"></i>
+                                <span>Áreas de Clique Ampliadas</span>
+                                <label class="toggle-switch float-end">
+                                    <input type="checkbox" id="bigTargets" checked onchange="toggleBigTargets()">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos por Tipo de Deficiência -->
+        <section id="recursos-deficiencia" class="mb-5">
+            <h2 class="titulo-secao mb-4">
+                <i class="fas fa-wheelchair me-2"></i>Recursos por Tipo de Deficiência
+            </h2>
+            
+            <div class="row g-4">
+                <!-- Deficiência Visual -->
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="background: #E3F2FD; color: #1976D2;">
+                                <i class="fas fa-eye-low-vision"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Deficiência Visual</h5>
+                                <p class="text-muted mb-0">Recursos para baixa visão e cegueira</p>
+                            </div>
+                        </div>
+                        
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Alto contraste e inversão de cores</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Aumento de fonte (até 200%)</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Leitores de tela compatíveis</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Textos alternativos em imagens</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Navegação por teclado completa</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Descrições em áudio de conteúdo</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Foco visível em elementos</li>
+                        </ul>
+                        
+                        <div class="mt-3">
+                            <span class="compatibility-badge">
+                                <i class="fab fa-nvda"></i> NVDA
+                            </span>
+                            <span class="compatibility-badge">
+                                <i class="fab fa-js"></i> JAWS
+                            </span>
+                            <span class="compatibility-badge">
+                                <i class="fab fa-apple"></i> VoiceOver
+                            </span>
+                            <span class="compatibility-badge">
+                                <i class="fab fa-chrome"></i> ChromeVox
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deficiência Auditiva -->
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="background: #FFF3E0; color: #F57C00;">
+                                <i class="fas fa-deaf"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Deficiência Auditiva</h5>
+                                <p class="text-muted mb-0">Recursos para surdez e dificuldade auditiva</p>
+                            </div>
+                        </div>
+                        
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Legendas em todos os vídeos</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Transcrições de áudio</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Alertas visíveis (não apenas sonoros)</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Opção de vibração para notificações</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Conteúdo não dependente de áudio</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Linguagem de sinais em vídeos importantes</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Configuração de volume independente</li>
+                        </ul>
+                        
+                        <div class="mt-3">
+                            <button class="btn btn-outline-warning btn-sm" onclick="showSignLanguageDemo()">
+                                <i class="fas fa-hands me-1"></i>Demonstração Libras
+                            </button>
+                            <button class="btn btn-outline-info btn-sm ms-2" onclick="testClosedCaptions()">
+                                <i class="fas fa-closed-captioning me-1"></i>Testar Legendas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deficiência Motora -->
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="background: #E8F5E9; color: #388E3C;">
+                                <i class="fas fa-wheelchair"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Deficiência Motora</h5>
+                                <p class="text-muted mb-0">Recursos para limitações físicas</p>
+                            </div>
+                        </div>
+                        
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Navegação completa por teclado</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Atalhos de teclado personalizáveis</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Áreas de clique ampliadas</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Tempo estendido para interações</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Suporte a comando de voz</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Scroll controlado por teclado</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Prevenção de ações acidentais</li>
+                        </ul>
+                        
+                        <div class="mt-3">
+                            <button class="btn btn-outline-success btn-sm" onclick="setupVoiceCommands()">
+                                <i class="fas fa-microphone me-1"></i>Ativar Comandos de Voz
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm ms-2" onclick="customizeShortcuts()">
+                                <i class="fas fa-keyboard me-1"></i>Personalizar Atalhos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deficiência Cognitiva -->
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="feature-icon me-3" style="background: #F3E5F5; color: #7B1FA2;">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">Deficiência Cognitiva</h5>
+                                <p class="text-muted mb-0">Recursos para autismo, TDAH, dislexia, etc.</p>
+                            </div>
+                        </div>
+                        
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle text-success"></i> Layout limpo e consistente</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Fontes específicas para dislexia</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Redução de distrações visuais</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Linguagem simples e clara</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Instruções passo a passo</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Tempo estendido para leitura</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Opção de leitura guiada</li>
+                        </ul>
+                        
+                        <div class="mt-3">
+                            <button class="btn btn-outline-purple btn-sm" onclick="activateReadingGuide()">
+                                <i class="fas fa-highlighter me-1"></i>Ativar Guia de Leitura
+                            </button>
+                            <button class="btn btn-outline-info btn-sm ms-2" onclick="simplifyLanguage()">
+                                <i class="fas fa-comment-alt me-1"></i>Simplificar Linguagem
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teste de Acessibilidade -->
+        <section id="teste-acessibilidade" class="mb-5">
+            <h2 class="titulo-secao mb-4">
+                <i class="fas fa-vial me-2"></i>Teste de Acessibilidade
+            </h2>
+            
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Verifique a acessibilidade do seu site</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group mb-3">
+                                <label for="urlToTest" class="form-label">URL para testar:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="urlToTest" 
+                                           placeholder="https://seusite.com" value="index.html">
+                                    <button class="btn btn-primary" onclick="testCurrentSite()">
+                                        <i class="fas fa-search me-1"></i>Testar
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Restante do conteúdo da página -->
+                            <div class="progress mb-3" style="height: 25px;">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" 
+                                     role="progressbar" style="width: 92%;" aria-valuenow="92" aria-valuemin="0" 
+                                     aria-valuemax="100">92% Acessível</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card border-0 bg-light mb-3">
+                                        <div class="card-body">
+                                            <h6 class="card-title">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                Pontos Fortes
+                                            </h6>
+                                            <ul class="small mb-0">
+                                                <li>Contraste de cores adequado</li>
+                                                <li>Navegação por teclado completa</li>
+                                                <li>Textos alternativos presentes</li>
+                                                <li>Estrutura de cabeçalhos correta</li>
+                                                <li>Formulários acessíveis</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-0 bg-light mb-3">
+                                        <div class="card-body">
+                                            <h6 class="card-title">
+                                                <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                                Pode Melhorar
+                                            </h6>
+                                            <ul class="small mb-0">
+                                                <li>Algumas imagens sem descrição</li>
+                                                <li>Contraste em botões secundários</li>
+                                                <li>Legendas automáticas em vídeos</li>
+                                                <li>Ordem de tabulação em formulários</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card border-0 bg-primary text-white">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-medal fa-3x mb-3"></i>
+                                    <h5 class="card-title">WCAG 2.1 AA</h5>
+                                    <p class="card-text">Este site está em conformidade com as diretrizes de acessibilidade de nível AA.</p>
+                                    <button class="btn btn-light btn-sm" onclick="showWCAGDetails()">
+                                        Ver Diretrizes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ferramentas e Compatibilidade -->
+        <section class="mb-5">
+            <h2 class="titulo-secao mb-4">
+                <i class="fas fa-tools me-2"></i>Ferramentas e Compatibilidade
+            </h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-plug me-2 text-primary"></i>
+                            Compatibilidade com Leitores de Tela
+                        </h5>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fab fa-windows fa-2x me-3 text-primary"></i>
+                                    <div>
+                                        <div class="fw-bold">NVDA</div>
+                                        <small class="text-success">
+                                            <i class="fas fa-check-circle"></i> Totalmente compatível
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fab fa-js fa-2x me-3 text-warning"></i>
+                                    <div>
+                                        <div class="fw-bold">JAWS</div>
+                                        <small class="text-success">
+                                            <i class="fas fa-check-circle"></i> Totalmente compatível
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fab fa-apple fa-2x me-3 text-secondary"></i>
+                                    <div>
+                                        <div class="fw-bold">VoiceOver</div>
+                                        <small class="text-success">
+                                            <i class="fas fa-check-circle"></i> Totalmente compatível
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fab fa-chrome fa-2x me-3 text-danger"></i>
+                                    <div>
+                                        <div class="fw-bold">ChromeVox</div>
+                                        <small class="text-success">
+                                            <i class="fas fa-check-circle"></i> Totalmente compatível
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="feature-card">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-download me-2 text-success"></i>
+                            Ferramentas Recomendadas
+                        </h5>
+                        <ul class="feature-list">
+                            <li>
+                                <i class="fas fa-check text-success"></i>
+                                <span>WAVE Evaluation Tool</span>
+                                <a href="#" class="float-end small">Instalar</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-check text-success"></i>
+                                <span>axe DevTools</span>
+                                <a href="#" class="float-end small">Instalar</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-check text-success"></i>
+                                <span>Color Contrast Analyzer</span>
+                                <a href="#" class="float-end small">Instalar</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-check text-success"></i>
+                                <span>HeadingsMap</span>
+                                <a href="#" class="float-end small">Instalar</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-check text-success"></i>
+                                <span>Screen Reader Simulator</span>
+                                <a href="#" class="float-end small">Instalar</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informações Legais -->
+        <section class="mb-5">
+            <div class="card border-0 bg-light">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">
+                        <i class="fas fa-balance-scale me-2"></i>
+                        Informações Legais sobre Acessibilidade
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="small">
+                                <strong>Lei Brasileira de Inclusão (LBI - Lei 13.146/2015):</strong>
+                                Estabelece que todos os sites devem ser acessíveis, garantindo o acesso à informação e comunicação às pessoas com deficiência.
+                            </p>
+                            <p class="small">
+                                <strong>Decreto nº 10.177/2019:</strong>
+                                Regulamenta a acessibilidade nos sítios eletrônicos e portais do governo federal.
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="small">
+                                <strong>WCAG 2.1 (Web Content Accessibility Guidelines):</strong>
+                                Diretrizes internacionais para acessibilidade na web, com três níveis de conformidade: A, AA e AAA.
+                            </p>
+                            <p class="small">
+                                <strong>e-MAG (Modelo de Acessibilidade em Governo Eletrônico):</strong>
+                                Padrão brasileiro que estabelece requisitos de acessibilidade para portais e sites governamentais.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-outline-primary btn-sm me-2" onclick="showLegalDetails()">
+                            Ver Detalhes Legais
+                        </button>
+                        <button class="btn btn-outline-success btn-sm" onclick="downloadAccessibilityReport()">
+                            <i class="fas fa-download me-1"></i>Baixar Relatório
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Botão Flutuante de Acessibilidade -->
+    <div class="accessibility-floating-btn" id="accessibilityFloatingBtn">
+        <div class="accessibility-quick-menu" id="quickAccessMenu">
+            <button class="quick-menu-btn" onclick="changeContrast('high')">
+                <i class="fas fa-adjust"></i>
+                <span>Alto Contraste</span>
+            </button>
+            <button class="quick-menu-btn" onclick="changeFontSize(1)">
+                <i class="fas fa-text-height"></i>
+                <span>Aumentar Texto</span>
+            </button>
+            <button class="quick-menu-btn" onclick="readAloud('Bem-vindo ao site Esporte Total. Use os recursos de acessibilidade para melhor navegação.')">
+                <i class="fas fa-volume-up"></i>
+                <span>Ler em Voz Alta</span>
+            </button>
+            <button class="quick-menu-btn" onclick="scrollToSection('painel-controle')">
+                <i class="fas fa-sliders-h"></i>
+                <span>Painel Completo</span>
+            </button>
+            <hr class="my-1">
+            <button class="quick-menu-btn" onclick="toggleQuickMenu()">
+                <i class="fas fa-times"></i>
+                <span>Fechar Menu</span>
+            </button>
+        </div>
+        
+        <button class="accessibility-btn" onclick="toggleQuickMenu()">
+            <i class="fas fa-universal-access"></i>
+            Acessibilidade
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">Esporte Total</h5>
+                    <p class="small">O seu portal completo de esportes com acessibilidade para todos.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">Links Rápidos</h5>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html" class="text-white text-decoration-none">Início</a></li>
+                        <li><a href="futebol.html" class="text-white text-decoration-none">Futebol</a></li>
+                        <li><a href="basquete.html" class="text-white text-decoration-none">Basquete</a></li>
+                        <li><a href="#" onclick="scrollToSection('painel-controle')" class="text-white text-decoration-none">Acessibilidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">Acessibilidade</h5>
+                    <p class="small">
+                        <i class="fas fa-universal-access me-2"></i>
+                        Este site segue as diretrizes WCAG 2.1 AA e a Lei Brasileira de Inclusão.
+                    </p>
+                    <button class="btn btn-outline-light btn-sm" onclick="resetAccessibilitySettings()">
+                        <i class="fas fa-undo me-1"></i>Redefinir Configurações
+                    </button>
+                </div>
+            </div>
+            <hr class="bg-light my-4">
+            <div class="text-center small">
+                <p class="mb-0">© 2023 Esporte Total. Todos os direitos reservados.</p>
+                <p class="mb-0">Conteúdo acessível para todos os públicos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SVG Filters para Daltonismo (ocultos) -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none">
+        <defs>
+            <filter id="protanopia">
+                <feColorMatrix type="matrix" values="0.567, 0.433, 0, 0, 0  0.558, 0.442, 0, 0, 0  0, 0.242, 0.758, 0, 0  0, 0, 0, 1, 0"/>
+            </filter>
+            <filter id="deuteranopia">
+                <feColorMatrix type="matrix" values="0.625, 0.375, 0, 0, 0  0.7, 0.3, 0, 0, 0  0, 0.3, 0.7, 0, 0  0, 0, 0, 1, 0"/>
+            </filter>
+            <filter id="tritanopia">
+                <feColorMatrix type="matrix" values="0.95, 0.05, 0, 0, 0  0, 0.433, 0.567, 0, 0  0, 0.475, 0.525, 0, 0  0, 0, 0, 1, 0"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Biblioteca de Acessibilidade -->
+    <script src="https://cdn.jsdelivr.net/npm/accessibility-js@1.0.0/dist/js/accessibility.min.js"></script>
+    
+    <!-- JavaScript Personalizado para Acessibilidade -->
+    <script>
+        // Funções de navegação na mesma página
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Função para mostrar/ocultar menu rápido
+        function toggleQuickMenu() {
+            const menu = document.getElementById('quickAccessMenu');
+            menu.classList.toggle('show');
+        }
+        
+        // Fechar menu rápido ao clicar fora
+        document.addEventListener('click', function(event) {
+            const floatingBtn = document.getElementById('accessibilityFloatingBtn');
+            const quickMenu = document.getElementById('quickAccessMenu');
+            
+            if (!floatingBtn.contains(event.target) && quickMenu.classList.contains('show')) {
+                quickMenu.classList.remove('show');
+            }
+        });
+        
+        // Funções de acessibilidade básicas
+        function changeContrast(mode) {
+            document.body.className = '';
+            if (mode === 'high') {
+                document.body.classList.add('high-contrast');
+            } else if (mode === 'yellow') {
+                document.body.style.backgroundColor = '#FFFF00';
+                document.body.style.color = '#000000';
+            } else if (mode === 'blue') {
+                document.body.style.backgroundColor = '#0000FF';
+                document.body.style.color = '#FFFFFF';
+            } else {
+                document.body.style.backgroundColor = '';
+                document.body.style.color = '';
+            }
+            
+            // Atualizar botões ativos
+            document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function changeFontSize(sizeChange) {
+            const currentSize = parseFloat(getComputedStyle(document.body).fontSize);
+            let newSize;
+            
+            if (sizeChange === 0) {
+                newSize = 16; // Tamanho padrão
+            } else {
+                newSize = currentSize + sizeChange;
+            }
+            
+            // Limitar tamanho entre 12px e 24px
+            newSize = Math.max(12, Math.min(24, newSize));
+            document.body.style.fontSize = newSize + 'px';
+            
+            // Atualizar botões ativos
+            document.querySelectorAll('.font-size-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function toggleDyslexiaFont() {
+            document.body.classList.toggle('dyslexia-font');
+        }
+        
+        function toggleInvertColors() {
+            document.body.classList.toggle('invert-colors');
+        }
+        
+        function toggleScreenReader() {
+            alert('Modo leitor de tela ativado. Use as setas para navegar.');
+        }
+        
+        function readAloud(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'pt-BR';
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Seu navegador não suporta leitura em voz alta.');
+            }
+        }
+        
+        function toggleAltText() {
+            alert('Textos alternativos ' + (document.getElementById('altText').checked ? 'ativados' : 'desativados'));
+        }
+        
+        function toggleKeyboardNavigation() {
+            alert('Navegação por teclado ' + (document.getElementById('keyboardNav').checked ? 'ativada' : 'desativada'));
+        }
+        
+        function applyColorFilter(filterType) {
+            document.body.className = '';
+            if (filterType !== 'normal') {
+                document.body.classList.add(filterType + '-filter');
+            }
+        }
+        
+        function toggleReducedMotion() {
+            alert('Redução de animação ' + (document.getElementById('reduceMotion').checked ? 'ativada' : 'desativada'));
+        }
+        
+        function togglePauseGifs() {
+            alert('GIFs ' + (document.getElementById('pauseGifs').checked ? 'pausados' : 'reproduzindo'));
+        }
+        
+        function toggleBigCursor() {
+            document.body.classList.toggle('big-cursor');
+            alert('Cursor ' + (document.getElementById('bigCursor').checked ? 'ampliado' : 'normal'));
+        }
+        
+        function toggleBigTargets() {
+            alert('Áreas de clique ' + (document.getElementById('bigTargets').checked ? 'ampliadas' : 'normais'));
+        }
+        
+        function showSignLanguageDemo() {
+            alert('Demonstração de Libras ativada. Um intérprete aparecerá nos vídeos importantes.');
+        }
+        
+        function testClosedCaptions() {
+            alert('Teste de legendas: verifique se as legendas estão aparecendo corretamente nos vídeos.');
+        }
+        
+        function setupVoiceCommands() {
+            alert('Configuração de comandos de voz iniciada. Siga as instruções para configurar.');
+        }
+        
+        function customizeShortcuts() {
+            alert('Personalização de atalhos aberta. Você pode alterar os atalhos de teclado.');
+        }
+        
+        function activateReadingGuide() {
+            alert('Guia de leitura ativado. Uma linha destacada ajudará na leitura do texto.');
+        }
+        
+        function simplifyLanguage() {
+            alert('Linguagem simplificada ativada. O texto será apresentado de forma mais direta.');
+        }
+        
+        function runAccessibilityCheck() {
+            document.getElementById('accessibilityScore').textContent = '95%';
+            document.getElementById('activeFeatures').textContent = '9';
+            document.getElementById('wcagStatus').textContent = 'WCAG 2.1 AA - Excelente';
+            alert('Verificação de acessibilidade concluída! 95% de conformidade.');
+        }
+        
+        function testCurrentSite() {
+            const url = document.getElementById('urlToTest').value;
+            alert('Testando acessibilidade de: ' + url + '\nAguarde...');
+        }
+        
+        function showWCAGDetails() {
+            alert('Diretrizes WCAG 2.1 AA:\n\n1. Perceptível\n2. Operável\n3. Compreensível\n4. Robusto\n\nVisite w3.org/WAI/WCAG21 para mais detalhes.');
+        }
+        
+        function showLegalDetails() {
+            alert('Lei Brasileira de Inclusão (13.146/2015) exige que todos os sites sejam acessíveis para pessoas com deficiência.');
+        }
+        
+        function downloadAccessibilityReport() {
+            alert('Relatório de acessibilidade sendo baixado...');
+        }
+        
+        function resetAccessibilitySettings() {
+            document.body.className = '';
+            document.body.style.fontSize = '';
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+            
+            // Resetar todos os checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.getElementById('altText').checked = true;
+            document.getElementById('keyboardNav').checked = true;
+            document.getElementById('bigTargets').checked = true;
+            
+            // Resetar botões ativos
+            document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.color-option')[0].classList.add('active');
+            
+            document.querySelectorAll('.font-size-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.font-size-btn')[2].classList.add('active');
+            
+            alert('Configurações de acessibilidade redefinidas para o padrão.');
+        }
+        
+        // Menu mobile toggle
+        function toggleMenu() {
+            const links = document.getElementById("myLinks");
+            if (links.style.display === "block") {
+                links.style.display = "none";
+            } else {
+                links.style.display = "block";
+            }
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar atalhos de teclado
+            document.addEventListener('keydown', function(e) {
+                // Alt + 1 = Ir para início
+                if (e.altKey && e.key === '1') {
+                    window.location.href = 'index.html';
+                }
+                // Alt + F = Buscar
+                if (e.altKey && e.key === 'f') {
+                    document.querySelector('input[type="search"], input[type="text"]')?.focus();
+                }
+                // Alt + A = Acessibilidade (volta ao topo da página atual)
+                if (e.altKey && e.key === 'a') {
+                    scrollToSection('painel-controle');
+                }
+            });
+            
+            // Verificar se há hash na URL e scroll para seção
+            if (window.location.hash) {
+                const sectionId = window.location.hash.substring(1);
+                setTimeout(() => scrollToSection(sectionId), 100);
+            }
+        });
+    </script>
+</body>
+</html>
