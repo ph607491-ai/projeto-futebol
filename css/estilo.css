@@ -708,6 +708,33 @@ body.tema-escuro .tabela-ranking td {
     font-weight: 600;
 }
 
+/* Estilo para todos os times classificados para a Super 8 (1º a 5º) */
+.classificado-super8 {
+    background-color: #e8f4fd !important;
+    border-left: 4px solid #0066cc !important;
+    font-weight: 600;
+}
+
+body.tema-escuro .classificado-super8 {
+    background-color: #2d3d4d !important;
+    border-left-color: #66b3ff !important;
+}
+
+.classificado-super8:hover {
+    background-color: #d0e8ff !important;
+}
+
+body.tema-escuro .classificado-super8:hover {
+    background-color: #3d4d5d !important;
+}
+
+/* Indicador visual para todos classificados */
+.classificado-super8 td:first-child::before {
+    content: "🔵";
+    margin-right: 5px;
+    font-size: 0.8em;
+}
+
 .tabela-ranking tbody tr:hover {
     background-color: #eef;
 }
@@ -716,6 +743,7 @@ body.tema-escuro .tabela-ranking tbody tr:hover {
     background-color: #4d4d4d;
 }
 
+/* Posições para Libertadores (1º a 5º) */
 .posicao-libertadores {
     background-color: #e6ffe6;
     border-left: 4px solid #00aa00;
@@ -723,6 +751,36 @@ body.tema-escuro .tabela-ranking tbody tr:hover {
 
 body.tema-escuro .posicao-libertadores {
     background-color: #2d4d2d;
+}
+
+/* Posições para Pré-Libertadores (6º e 7º) */
+.posicao-prelibertadores {
+    background-color: #fff9e6;
+    border-left: 4px solid #ffcc00;
+}
+
+body.tema-escuro .posicao-prelibertadores {
+    background-color: #4d4d2d;
+}
+
+/* Posições para Sul-Americana (8º a 16º) */
+.posicao-sulamericana {
+    background-color: #e8f4fd;
+    border-left: 4px solid #0066cc;
+}
+
+body.tema-escuro .posicao-sulamericana {
+    background-color: #2d3d4d;
+}
+
+/* Posições para Rebaixamento (17º a 20º) */
+.posicao-rebaixamento {
+    background-color: #ffe6e6;
+    border-left: 4px solid #ff4444;
+}
+
+body.tema-escuro .posicao-rebaixamento {
+    background-color: #4d2d2d;
 }
 
 .legenda-tabela {
@@ -737,6 +795,21 @@ body.tema-escuro .legenda-tabela {
 
 .verde {
     color: #00aa00;
+    font-weight: 600;
+}
+
+.azul {
+    color: #0066cc;
+    font-weight: 600;
+}
+
+.amarelo {
+    color: #cc9900;
+    font-weight: 600;
+}
+
+.vermelho {
+    color: #ff4444;
     font-weight: 600;
 }
 
@@ -1164,6 +1237,31 @@ body.tema-escuro .rodape-principal {
         color: black !important;
         border-left-color: black !important;
     }
+    
+    .classificado-super8 {
+        background-color: #f0f8ff !important;
+        border-left: 4px solid #0066cc !important;
+    }
+    
+    .posicao-libertadores {
+        background-color: #e6ffe6 !important;
+        border-left: 4px solid #00aa00 !important;
+    }
+    
+    .posicao-prelibertadores {
+        background-color: #fff9e6 !important;
+        border-left: 4px solid #ffcc00 !important;
+    }
+    
+    .posicao-sulamericana {
+        background-color: #e8f4fd !important;
+        border-left: 4px solid #0066cc !important;
+    }
+    
+    .posicao-rebaixamento {
+        background-color: #ffe6e6 !important;
+        border-left: 4px solid #ff4444 !important;
+    }
 }
 
 /* ========== ALTERNAR TEMA ========== */
@@ -1188,6 +1286,27 @@ body.modo-noturno .form-control {
     background-color: #2d2d2d !important;
     border-color: #555 !important;
     color: #e0e0e0 !important;
+}
+
+body.modo-noturno .classificado-super8 {
+    background-color: #2d3d4d !important;
+    border-left-color: #66b3ff !important;
+}
+
+body.modo-noturno .posicao-libertadores {
+    background-color: #2d4d2d !important;
+}
+
+body.modo-noturno .posicao-prelibertadores {
+    background-color: #4d4d2d !important;
+}
+
+body.modo-noturno .posicao-sulamericana {
+    background-color: #2d3d4d !important;
+}
+
+body.modo-noturno .posicao-rebaixamento {
+    background-color: #4d2d2d !important;
 }
 
 /* ========== ANIMAÇÕES SUAVES ========== */
