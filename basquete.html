@@ -177,6 +177,18 @@
             background: #cc552a;
         }
         
+        /* Estilo adicional para a tabela */
+        .classificado-super8 td:nth-child(2) {
+            position: relative;
+        }
+        
+        .classificado-super8 td:nth-child(2)::after {
+            content: " 🏆";
+            color: #ff6b35;
+            font-size: 1em;
+            position: relative;
+        }
+        
         @media (max-width: 768px) {
             .video-container-unico iframe {
                 height: 300px;
@@ -334,51 +346,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="posicao-libertadores">
+                        <tr class="classificado-super8">
                             <td>1º</td>
+                            <td><strong>Flamengo</strong></td>
+                            <td>18</td>
+                            <td>3</td>
+                            <td>92%</td>
+                            <td>39</td>
+                        </tr>
+                        <tr class="classificado-super8">
+                            <td>2º</td>
+                            <td><strong>Sesi Franca</strong></td>
+                            <td>18</td>
+                            <td>3</td>
+                            <td>92%</td>
+                            <td>39</td>
+                        </tr>
+                        <tr class="classificado-super8">
+                            <td>3º</td>
                             <td><strong>Pinheiros</strong></td>
                             <td>17</td>
-                            <td>2</td>
-                            <td>89.5%</td>
-                            <td>36</td>
-                        </tr>
-                        <tr class="posicao-libertadores">
-                            <td>2º</td>
-                            <td><strong>Flamengo</strong></td>
-                            <td>17</td>
-                            <td>2</td>
-                            <td>89.5%</td>
-                            <td>36</td>
-                        </tr>
-                        <tr class="posicao-libertadores">
-                            <td>3º</td>
-                            <td><strong>KTO Minas</strong></td>
-                            <td>16</td>
                             <td>3</td>
-                            <td>84.2%</td>
-                            <td>35</td>
+                            <td>92%</td>
+                            <td>37</td>
                         </tr>
-                        <tr class="posicao-libertadores">
+                        <tr class="classificado-super8">
                             <td>4º</td>
-                            <td><strong>Sesi Franca</strong></td>
-                            <td>16</td>
-                            <td>3</td>
-                            <td>84.2%</td>
-                            <td>35</td>
+                            <td><strong>Minas</strong></td>
+                            <td>17</td>
+                            <td>4</td>
+                            <td>90%</td>
+                            <td>38</td>
                         </tr>
-                        <tr>
+                        <tr class="classificado-super8">
                             <td>5º</td>
                             <td><strong>CAIXA Brasília</strong></td>
-                            <td>14</td>
+                            <td>15</td>
                             <td>5</td>
-                            <td>73.7%</td>
-                            <td>33</td>
+                            <td>87%</td>
+                            <td>35</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <p class="legenda-tabela">
-                🔵 <span style="color: #0066cc;">Classificados para a Copa Super 8 2026</span> <br>
+                🔵 <span style="color: #0066cc; font-weight: bold;">Classificados para a Copa Super 8 2026 (1º a 5º colocados)</span><br>
                 V: Vitórias | D: Derrotas | AP: Aproveitamento | P: Pontos
             </p>
         </section>
@@ -448,10 +460,10 @@
 
                 <h5 style="margin-top: 20px;">📅 Próximos Jogos NBA:</h5>
                 <ul class="lista-jogos">
-                    <li>Wizards vs Pelicans (09/01)</li>
-                    <li>Celtics vs Raptors (09/01)</li>
-                    <li>Magic vs 76ers (09/01)</li>
-                    <li>Nets vs Clippers (09/01)</li>
+                    <li>Cleveland Cavaliers vs Utah Jazz (12/01) 21:00</li>
+                    <li>Indiana Pacers vs Boston Celtics (12/01) 21:30</li>
+                    <li>Toronto Raptors vs Philadelphia 76ers (12/01) 21:30</li>
+                    <li>Dallas Mavericks vs Brooklyn Nets (12/01) 22:30</li>
                 </ul>
             </article>
         </section>
@@ -533,6 +545,7 @@
                         <option value="flamengo">Flamengo</option>
                         <option value="minas">Minas</option>
                         <option value="franca">Franca</option>
+                        <option value="brasilia">CAIXA Brasília</option>
                         <option value="outro">Outro</option>
                     </select>
                 </div>
