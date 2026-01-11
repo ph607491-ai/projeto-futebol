@@ -22,20 +22,6 @@
             margin: 15px 0;
         }
         
-        .jogo-ao-vivo {
-            background: #ff4444;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            animation: piscar 2s infinite;
-            margin: 10px 0;
-        }
-        
-        @keyframes piscar {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
         .video-destaque {
             margin: 40px 0;
             text-align: center;
@@ -120,6 +106,54 @@
         
         .btn-video:hover {
             background: #008800;
+        }
+        
+        /* Estilo para pré-libertadores */
+        .posicao-prelibertadores {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffcc00;
+        }
+        
+        body.tema-escuro .posicao-prelibertadores {
+            background-color: #4d4d2d;
+            border-left-color: #ffd966;
+        }
+        
+        body.tema-esportivo .posicao-prelibertadores {
+            background-color: #fff0cc;
+            border-left-color: #ff9900;
+        }
+        
+        /* Estilo para sul-americana */
+        .posicao-sulamericana {
+            background-color: #e8f4fd;
+            border-left: 4px solid #0066cc;
+        }
+        
+        body.tema-escuro .posicao-sulamericana {
+            background-color: #2d3d4d;
+            border-left-color: #66b3ff;
+        }
+        
+        body.tema-esportivo .posicao-sulamericana {
+            background-color: #e0f0ff;
+            border-left-color: #0088ff;
+        }
+        
+        /* Estilo para rebaixamento */
+        .posicao-rebaixamento {
+            background-color: #ffe6e6;
+            border-left: 4px solid #ff4444;
+        }
+        
+        body.tema-escuro .posicao-rebaixamento {
+            background-color: #4d2d2d;
+            border-left-color: #ff6666;
+        }
+        
+        body.tema-esportivo .posicao-rebaixamento {
+            background-color: #ffe0e0;
+            border-left-color: #ff5555;
         }
         
         @media (max-width: 768px) {
@@ -211,14 +245,6 @@
             </div>
         </section>
 
-        <!-- Jogo ao Vivo (Simulado) -->
-        <div class="jogo-ao-vivo" id="jogoAoVivo">
-            <strong>⚽ JOGO AO VIVO AGORA:</strong> Flamengo 2 x 1 Palmeiras | 35' 2º Tempo
-            <button onclick="atualizarPlacar()" style="margin-left: 15px; padding: 5px 10px; background: white; color: #ff4444; border: none; border-radius: 5px; cursor: pointer;">
-                🔄 Atualizar
-            </button>
-        </div>
-
         <section class="secao-destaque" id="brasileirao">
             <h2 class="titulo-secao">🇧🇷 Campeonato Brasileiro Série A 2025</h2>
             
@@ -307,7 +333,7 @@
                             <td>39</td>
                             <td>+24</td>
                         </tr>
-                        <tr>
+                        <tr class="posicao-libertadores">
                             <td>5º</td>
                             <td><strong>Fluminense</strong></td>
                             <td>64</td>
@@ -319,7 +345,7 @@
                             <td>39</td>
                             <td>+11</td>
                         </tr>
-                        <tr>
+                        <tr class="posicao-prelibertadores">
                             <td>6º</td>
                             <td><strong>Botafogo</strong></td>
                             <td>63</td>
@@ -331,13 +357,181 @@
                             <td>38</td>
                             <td>+20</td>
                         </tr>
+                        <tr class="posicao-prelibertadores">
+                            <td>7º</td>
+                            <td><strong>Bahia</strong></td>
+                            <td>60</td>
+                            <td>38</td>
+                            <td>17</td>
+                            <td>9</td>
+                            <td>12</td>
+                            <td>50</td>
+                            <td>46</td>
+                            <td>+4</td>
+                        </tr>
+                        <tr class="posicao-sulamericana">
+                            <td>8º</td>
+                            <td><strong>São Paulo</strong></td>
+                            <td>51</td>
+                            <td>38</td>
+                            <td>14</td>
+                            <td>9</td>
+                            <td>15</td>
+                            <td>43</td>
+                            <td>47</td>
+                            <td>-4</td>
+                        </tr>
+                        <tr class="posicao-sulamericana">
+                            <td>9º</td>
+                            <td><strong>Grêmio</strong></td>
+                            <td>49</td>
+                            <td>38</td>
+                            <td>13</td>
+                            <td>10</td>
+                            <td>15</td>
+                            <td>47</td>
+                            <td>50</td>
+                            <td>-3</td>
+                        </tr>
+                        <tr class="posicao-sulamericana">
+                            <td>10º</td>
+                            <td><strong>Bragantino</strong></td>
+                            <td>48</td>
+                            <td>38</td>
+                            <td>14</td>
+                            <td>6</td>
+                            <td>18</td>
+                            <td>45</td>
+                            <td>57</td>
+                            <td>-12</td>
+                        </tr>
+                        <tr class="posicao-sulamericana">
+                            <td>11º</td>
+                            <td><strong>Atlético-MG</strong></td>
+                            <td>48</td>
+                            <td>38</td>
+                            <td>12</td>
+                            <td>12</td>
+                            <td>14</td>
+                            <td>43</td>
+                            <td>44</td>
+                            <td>-1</td>
+                        </tr>
+                        <tr class="posicao-sulamericana">
+                            <td>12º</td>
+                            <td><strong>Santos</strong></td>
+                            <td>47</td>
+                            <td>38</td>
+                            <td>12</td>
+                            <td>11</td>
+                            <td>15</td>
+                            <td>45</td>
+                            <td>50</td>
+                            <td>-5</td>
+                        </tr>
+                        <tr class="posicao-sulamericana">
+                            <td>13º</td>
+                            <td><strong>Corinthians</strong></td>
+                            <td>47</td>
+                            <td>38</td>
+                            <td>12</td>
+                            <td>11</td>
+                            <td>15</td>
+                            <td>42</td>
+                            <td>47</td>
+                            <td>-5</td>
+                        </tr>
+                        <tr class="posicao-sulamericana">
+                            <td>14º</td>
+                            <td><strong>Vasco</strong></td>
+                            <td>45</td>
+                            <td>38</td>
+                            <td>13</td>
+                            <td>6</td>
+                            <td>19</td>
+                            <td>55</td>
+                            <td>60</td>
+                            <td>-5</td>
+                        </tr>
+                        <tr>
+                            <td>15º</td>
+                            <td><strong>Vitória</strong></td>
+                            <td>45</td>
+                            <td>38</td>
+                            <td>11</td>
+                            <td>12</td>
+                            <td>15</td>
+                            <td>35</td>
+                            <td>52</td>
+                            <td>-17</td>
+                        </tr>
+                        <tr>
+                            <td>16º</td>
+                            <td><strong>Internacional</strong></td>
+                            <td>44</td>
+                            <td>38</td>
+                            <td>11</td>
+                            <td>11</td>
+                            <td>16</td>
+                            <td>44</td>
+                            <td>57</td>
+                            <td>-13</td>
+                        </tr>
+                        <tr class="posicao-rebaixamento">
+                            <td>17º</td>
+                            <td><strong>Ceará</strong></td>
+                            <td>43</td>
+                            <td>38</td>
+                            <td>11</td>
+                            <td>10</td>
+                            <td>17</td>
+                            <td>34</td>
+                            <td>40</td>
+                            <td>-6</td>
+                        </tr>
+                        <tr class="posicao-rebaixamento">
+                            <td>18º</td>
+                            <td><strong>Fortaleza</strong></td>
+                            <td>43</td>
+                            <td>38</td>
+                            <td>11</td>
+                            <td>10</td>
+                            <td>17</td>
+                            <td>43</td>
+                            <td>58</td>
+                            <td>-15</td>
+                        </tr>
+                        <tr class="posicao-rebaixamento">
+                            <td>19º</td>
+                            <td><strong>Juventude</strong></td>
+                            <td>35</td>
+                            <td>38</td>
+                            <td>9</td>
+                            <td>8</td>
+                            <td>21</td>
+                            <td>35</td>
+                            <td>69</td>
+                            <td>-34</td>
+                        </tr>
+                        <tr class="posicao-rebaixamento">
+                            <td>20º</td>
+                            <td><strong>Sport Recife</strong></td>
+                            <td>17</td>
+                            <td>38</td>
+                            <td>2</td>
+                            <td>11</td>
+                            <td>25</td>
+                            <td>28</td>
+                            <td>75</td>
+                            <td>-47</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
 
             <p class="legenda-tabela">
                 🟢 <span class="verde">Classificação para Libertadores 2026</span> | 
-                🟡 Pré-Libertadores | 🔵 Sul-Americana | 🔴 Rebaixamento<br>
+                🟡 Pré-Libertadores | 🔵 Sul-Americana | ⚪ Neutro | 🔴 Rebaixamento<br>
                 PTS: Pontos | J: Jogos | V: Vitórias | E: Empates | D: Derrotas
             </p>
         </section>
@@ -468,26 +662,6 @@
     <script src="js/validacao.js"></script>
     
     <script>
-        // Simulação de jogo ao vivo
-        let minuto = 35;
-        let tempo = '2º';
-        
-        function atualizarPlacar() {
-            minuto++;
-            if (minuto > 45 && tempo === '2º') {
-                minuto = 1;
-                tempo = 'Acréscimos';
-            }
-            
-            const placar = Math.random() > 0.7 ? '3 x 1' : '2 x 1';
-            document.getElementById('jogoAoVivo').innerHTML = `
-                <strong>⚽ JOGO AO VIVO AGORA:</strong> Flamengo ${placar} Palmeiras | ${minuto}' ${tempo}
-                <button onclick="atualizarPlacar()" style="margin-left: 15px; padding: 5px 10px; background: white; color: #ff4444; border: none; border-radius: 5px; cursor: pointer;">
-                    🔄 Atualizar
-                </button>
-            `;
-        }
-        
         // Carregar mais notícias
         function carregarMaisNoticias() {
             const btn = document.querySelector('.botao-destaque');
